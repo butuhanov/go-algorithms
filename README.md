@@ -4,4 +4,9 @@
 
 https://github.com/butuhanov/go-algorithms
 
-тест 1
+TODO
+
+Замена строки
+
+Strings are immutable so you cannot change its content once created. You need to first convert into a slice of rune then do the changes and in the end convert it back to string.
+
