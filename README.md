@@ -4,4 +4,4 @@
 
 https://github.com/butuhanov/go-algorithms
 
-тест
+тест 1
