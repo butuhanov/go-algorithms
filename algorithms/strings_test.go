@@ -4,17 +4,17 @@ import "testing"
 
 func TestChangeStringElement(t *testing.T) {
 	cases := []struct {
-		in string;
-		position int;
-		symbol rune;
-		want string;	
+		in       string
+		position int
+		symbol   rune
+		want     string
 	}{
-		{"hello, World!", 0, 'H', "Hello, World!"},	
-		{"hello", 3, 'H', "helHo"},		
-		{"привет!", 0, 'П', "Привет!"},					
+		{"hello, World!", 0, 'H', "Hello, World!"},
+		{"hello", 3, 'H', "helHo"},
+		{"привет!", 0, 'П', "Привет!"},
 	}
-for _, c := range cases {
-	got := ChangeStringElement(c.in, c.position, c.symbol)
+	for _, c := range cases {
+		got := ChangeStringElement(c.in, c.position, c.symbol)
 		if got != c.want {
 			t.Errorf("ChangeStringElement(%q) == %q, want %q", c.in, got, c.want)
 		}
