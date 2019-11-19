@@ -12,6 +12,7 @@ func TestChangeStringElement(t *testing.T) {
 		{"hello, World!", 0, 'H', "Hello, World!"},
 		{"hello", 3, 'H', "helHo"},
 		{"привет!", 0, 'П', "Привет!"},
+		{"♥♥♥", 1, 'П', "♥П♥"},
 	}
 	for _, c := range cases {
 		got := ChangeStringElement(c.in, c.position, c.symbol)
