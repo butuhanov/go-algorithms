@@ -32,15 +32,27 @@ func BinarySearch(data []int, value int) bool {
 	low := 0
 	high := size - 1
 	for low <= high {
-		mid = low + (high-low)/2
+		mid = low + (high-low)/2 //  At each step, we reduce our search space by half
 		switch {
 		case data[mid] == value:
 			return true
-		case data[mid] < value:
+		case data[mid] < value: //  search the left half of the list
 			low = mid + 1
 		default:
-			high = mid - 1
+			high = mid - 1 //  search the right half of the list
 		}
 	}
 	return false
+}
+
+// ReverseArray swaps list items from start to end values
+func ReverseArray(data []int, start int, end int) []int {
+	i := start
+	j := end
+	for i < j {
+		data[i], data[j] = data[j], data[i]
+		i++
+		j--
+	}
+	return data
 }

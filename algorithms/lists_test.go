@@ -1,6 +1,9 @@
 package algorithms
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestSumList(t *testing.T) {
 
@@ -77,6 +80,40 @@ func TestBinarySearch(t *testing.T) {
 	for _, element := range tests {
 		v := SequentialSearch(element.values, element.item)
 		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+
+func TestReverseArray(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		start  int
+		end    int
+		result []int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, 1, []int{2, 1}},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, 0, 6, []int{1, 1, 1, 1, 1, 1, -6}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 0, 6, []int{7, 6, 5, 4, 3, 2, 1}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 1, 5, []int{1, 6, 5, 4, 3, 2, 7}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 3, 5, []int{1, 2, 3, 6, 5, 4, 7}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 3, 4, []int{1, 2, 3, 5, 4, 6, 7}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 4, 4, []int{1, 2, 3, 4, 5, 6, 7}},
+		{[]int{-1, 1}, 0, 1, []int{1, -1}},
+		{[]int{-1, 1}, 1, 1, []int{-1, 1}},
+		{[]int{0, 0}, 0, 1, []int{0, 0}},
+	}
+
+	for _, element := range tests {
+		v := ReverseArray(element.values, element.start, element.end)
+		if !reflect.DeepEqual(v, element.result) {
 			t.Error(
 				"For", element.values,
 				"expected", element.result,
