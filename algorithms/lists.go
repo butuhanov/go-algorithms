@@ -45,7 +45,7 @@ func BinarySearch(data []int, value int) bool {
 	return false
 }
 
-// ReverseArray swaps list items from start to end values
+// ReverseArray swaps list items from the start to the end values
 func ReverseArray(data []int, start int, end int) []int {
 	i := start
 	j := end
@@ -100,4 +100,24 @@ func RotateArrayRight(data []int, k int) []int {
 	data = ReverseArray(data, 0, k-1) // reversing last n-k numbers
 
 	return data
+}
+
+// MaxSubArraySum returns sum of contiguous subarray whose sum (sum of elements) is maximum.
+//  Maximum subarray in a list is found in a single scan. We keep track of global maximum sum so far and the maximum sum, which include the current element.
+//  When we find global maximum value so far is less than the maximum value containing current value we update the global maximum value.
+//  Finally return the global maximum value.
+func MaxSubArraySum(data []int) int {
+	size := len(data)
+	maxSoFar := 0
+	maxEndingHere := 0
+	for i := 0; i < size; i++ {
+		maxEndingHere = maxEndingHere + data[i]
+		if maxEndingHere < 0 {
+			maxEndingHere = 0
+		}
+		if maxSoFar < maxEndingHere {
+			maxSoFar = maxEndingHere
+		}
+	}
+	return maxSoFar
 }

@@ -214,3 +214,33 @@ func TestRotateArrayRight(t *testing.T) {
 		}
 	}
 }
+
+func TestMaxSubArraySum(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		result int
+	}
+
+	var tests = []testelements{
+		{[]int{0, 1, 1, 1, 0, 1, 2, 1, 2}, 9},
+		{[]int{0, 1, -1, -1, 0, 1, -2, 1, -2}, 1},
+		{[]int{5, -1, -1, -1, 0, 1, 2, 1, -2}, 6},
+		{[]int{-1, -1, -1, -1, 0, -2, -2, -4, -2}, 0},
+		{[]int{-3, -1, -1, -1, -5, -2, -2, -4, -2}, 0},
+		{[]int{1, -2, 3, 4, -4, 6, -14, 8, 2}, 10},
+		{[]int{1, 2, -1, -1, 0, -1, 4, -1, -2}, 4},
+		{[]int{1, 2, -1, -1, 0, -1, 2, -1, -2}, 3},
+	}
+
+	for _, element := range tests {
+		v := MaxSubArraySum(element.values)
+		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
