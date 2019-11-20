@@ -33,12 +33,12 @@ func BinarySearch(data []int, value int) bool {
 	high := size - 1
 	for low <= high {
 		mid = low + (high-low)/2
-		if data[mid] == value {
+		switch {
+		case data[mid] == value:
 			return true
-		}
-		if data[mid] < value {
+		case data[mid] < value:
 			low = mid + 1
-		} else {
+		default:
 			high = mid - 1
 		}
 	}
