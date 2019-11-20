@@ -73,3 +73,14 @@ func RotateArrayLeft(data []int, k int) []int {
 	data = ReverseArray(data, 0, n-1)
 	return data
 }
+
+// RotateArrayRight is rotates the array to the right by k steps, where k is non-negative
+func RotateArrayRight(data []int, k int) []int {
+	n := len(data)
+	if k > n {
+		k = k % n
+	}
+		k = n - k
+	data = RotateArrayLeft(data, k)
+	return data
+}
