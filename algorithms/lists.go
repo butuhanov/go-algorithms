@@ -11,13 +11,36 @@ func SumList(data []int) int {
 
 }
 
- // SequentialSearch - look up the value in unknown array
+// SequentialSearch - look up the value in unknown array
+// we do not have information about the structure of the array, so we sequentially look for the element one by one
+// This is suitable if the data is not sorted. If the data is sorted, a binary search can be used.
 func SequentialSearch(data []int, value int) bool {
-size := len(data)
-for i := 0; i < size; i++ {
-if value == data[i] {
-return true
+	size := len(data)
+	for i := 0; i < size; i++ {
+		if value == data[i] {
+			return true
+		}
+	}
+	return false
 }
-}
-return false
+
+// BinarySearch looking up the value in the sorted array
+// We examine the middle position at each step. Depending upon the data that we are searching is greater or smaller than the middle value. We will search either the left or the right portion of the array. At each step, we are eliminating half of the search space there by making this algorithm very efficient.
+func BinarySearch(data []int, value int) bool {
+	size := len(data)
+	var mid int
+	low := 0
+	high := size - 1
+	for low <= high {
+		mid = low + (high-low)/2
+		if data[mid] == value {
+			return true
+		}
+		if data[mid] < value {
+			low = mid + 1
+		} else {
+			high = mid - 1
+		}
+	}
+	return false
 }
