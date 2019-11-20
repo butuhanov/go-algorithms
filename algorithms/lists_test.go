@@ -122,3 +122,49 @@ func TestReverseArray(t *testing.T) {
 		}
 	}
 }
+
+func TestRotateArrayLeft(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		steps  int
+		result []int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, []int{1, 2}},
+		{[]int{1, 2}, 1, []int{2, 1}},
+		{[]int{1, 2}, 2, []int{1, 2}},
+		{[]int{1, 2}, 3, []int{2, 1}},
+		{[]int{1, 2}, 4, []int{1, 2}},
+		{[]int{1, 2}, 5, []int{2, 1}},
+
+		{[]int{1}, 2, []int{1}},
+		{[]int{-1}, 2, []int{-1}},
+		{[]int{0}, 2, []int{0}},
+
+		{[]int{1, 2, 3, 4, 5}, 0, []int{1, 2, 3, 4, 5}},
+		{[]int{1, 2, 3, 4, 5}, 1, []int{2, 3, 4, 5, 1}},
+		{[]int{1, 2, 3, 4, 5}, 2, []int{3, 4, 5, 1, 2}},
+		{[]int{1, 2, 3, 4, 5}, 3, []int{4, 5, 1, 2, 3}},
+		{[]int{1, 2, 3, 4, 5}, 4, []int{5, 1, 2, 3, 4}},
+
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 4, []int{5, 6, 7, 1, 2, 3, 4}},
+		{[]int{-1, -100, 3, 99}, 2, []int{3, 99, -1, -100}},
+		{[]int{10, 20, 30, 40, 50, 60}, 2, []int{30, 40, 50, 60, 10, 20}},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3, []int{4, 5, 6, 7, 8, 9, 10, 1, 2, 3}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 2, []int{3, 4, 5, 6, 7, 1, 2}},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, 3, []int{4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3}},
+	}
+
+	for _, element := range tests {
+		v := RotateArrayLeft(element.values, element.steps)
+		if !reflect.DeepEqual(v, element.result) {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
