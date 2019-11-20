@@ -80,11 +80,18 @@ func RotateArrayLeft(data []int, k int) []int {
 
 // RotateArrayRight is rotates the array to the right by k steps, where k is non-negative
 // https://leetcode.com/problems/rotate-array/
+// Example:
+// Original List                   : 1 2 3 4 5 6 7
+// After reversing all numbers     : 7 6 5 4 3 2 1
+// After reversing first k numbers : 5 6 7 4 3 2 1
+// After revering last n-k numbers : 5 6 7 1 2 3 4 --> Result
 func RotateArrayRight(data []int, k int) []int {
 	n := len(data)
 	if k > n {
 		k = k % n
 	}
+
+	// code below works too
 	// 	k = n - k
 	// data = RotateArrayLeft(data, k)
 
