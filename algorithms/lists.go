@@ -58,10 +58,14 @@ func ReverseArray(data []int, start int, end int) []int {
 }
 
 // RotateArrayLeft is rotates the array to the left by k steps, where k is non-negative
+// Using Reverse approach that based on the fact that when we rotate the array k times, k elements from the back end of the array come to the front and the rest of the elements from the front shift backwards.
+// In this approach, we firstly reverse all the elements of the array. Then, reversing the first k elements followed by reversing the rest n−k elements gives us the required result.
+// Time complexity : O(n). n elements are reversed a total of three times.
+// Space complexity : O(1). No extra space is used.
 // see also:
 // https://www.geeksforgeeks.org/array-rotation/
 // https://hackernoon.com/fun-with-array-rotations-add4a335d79a
-// https://leetcode.com/problems/rotate-array/ (right rotation)
+// https://leetcode.com/problems/rotate-array/solution/ (right rotation)
 func RotateArrayLeft(data []int, k int) []int {
 	n := len(data)
 	if k > n {
@@ -75,12 +79,18 @@ func RotateArrayLeft(data []int, k int) []int {
 }
 
 // RotateArrayRight is rotates the array to the right by k steps, where k is non-negative
+// https://leetcode.com/problems/rotate-array/
 func RotateArrayRight(data []int, k int) []int {
 	n := len(data)
 	if k > n {
 		k = k % n
 	}
-		k = n - k
-	data = RotateArrayLeft(data, k)
+	// 	k = n - k
+	// data = RotateArrayLeft(data, k)
+
+	data = ReverseArray(data, 0, n-1) // reversing all numbers
+	data = ReverseArray(data, k, n-1) // reversing first k numbers
+	data = ReverseArray(data, 0, k-1) // reversing last n-k numbers
+
 	return data
 }
