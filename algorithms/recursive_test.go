@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -108,6 +109,34 @@ func TestFibonacci(t *testing.T) {
 		if v != pair.result {
 			t.Error(
 				"For", pair.value,
+				"expected", pair.result,
+				"got", v,
+			)
+		}
+	}
+}
+func TestPermutation(t *testing.T) {
+
+	type testpair struct {
+		data   []int
+		i      int
+		length int
+		result [][]int
+	}
+
+	var tests = []testpair{
+		// {[]int{1, 2}, 0, 2, []int{1, 2}},
+		// {[]int{1, 2, 3}, 0, 3, [][]int{{1, 2, 13}, {1, 2, 13}}},
+		// {[]int{1, 2, 3, 4, 5}, 0, 3, []int{1, 1}},
+		// {[]int{1, 2, 3, 4, 5}, 1, 3, []int{1, 1}},
+		// {[]int{0, 1, 2, 3, 4}, 0, 5, []int{1, 1}},
+	}
+
+	for _, pair := range tests {
+		v := Permutation(pair.data, pair.i, pair.length)
+		if !reflect.DeepEqual(v, pair.result) {
+			t.Error(
+				"For", pair.data,
 				"expected", pair.result,
 				"got", v,
 			)
