@@ -57,3 +57,30 @@ func TestTowersOfHanoi(t *testing.T) {
 		}
 	}
 }
+
+func TestGCD(t *testing.T) {
+
+	type testpair struct {
+		values []int
+		result int
+	}
+
+	var tests = []testpair{
+		{[]int{1, 2}, 1},
+		{[]int{3, 2}, 1},
+		{[]int{6, 2}, 2},
+		{[]int{4534532, 576452}, 4},
+		{[]int{97406784, 123456}, 123456},
+	}
+
+	for _, pair := range tests {
+		v := GCD(pair.values[0], pair.values[1])
+		if v != pair.result {
+			t.Error(
+				"For", pair.values[0], "and", pair.values[1],
+				"expected", pair.result,
+				"got", v,
+			)
+		}
+	}
+}

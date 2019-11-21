@@ -36,3 +36,14 @@ func tohUtil(num int, from string, to string, temp string) string {
 	return result
 
 }
+
+// GCD finds the greatest common divisor (largest common factor) using the Euclid’s (Euclidean) algorithm
+func GCD(m int, n int) int {
+	if m < n {
+		return GCD(n, m)
+	}
+	if m%n == 0 {
+		return n
+	}
+	return GCD(n, m%n)
+}
