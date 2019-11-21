@@ -84,3 +84,33 @@ func TestGCD(t *testing.T) {
 		}
 	}
 }
+
+func TestFibonacci(t *testing.T) {
+
+	type testpair struct {
+		value  int
+		result int
+	}
+
+	var tests = []testpair{
+		{0, 0},
+		{1, 1},
+		{2, 1},
+		{3, 2},
+		{10, 55},
+		{12, 144},
+		{20, 6765},
+		{30, 832040},
+	}
+
+	for _, pair := range tests {
+		v := Fibonacci(pair.value)
+		if v != pair.result {
+			t.Error(
+				"For", pair.value,
+				"expected", pair.result,
+				"got", v,
+			)
+		}
+	}
+}

@@ -47,3 +47,12 @@ func GCD(m int, n int) int {
 	}
 	return GCD(n, m%n)
 }
+
+// Fibonacci finds a given number in a Fibonacci sequence (https://en.wikipedia.org/wiki/Fibonacci_number)
+func Fibonacci (n int) int {
+if n <= 1 {
+return n
+}
+return Fibonacci(n-1) + Fibonacci(n-2)
+
+}
