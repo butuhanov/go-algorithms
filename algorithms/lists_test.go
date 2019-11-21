@@ -70,6 +70,7 @@ func TestBinarySearch(t *testing.T) {
 	var tests = []testelements{
 		{[]int{1, 2}, 3, false},
 		{[]int{-6, 1, 1, 1, 1, 1, 1}, 6, false},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, 1, true},
 		{[]int{1, 2, 3, 4, 5, 6, 7}, 7, true},
 		{[]int{1, 2, 3, 4, 5, 6, 7}, 8, false},
 		{[]int{-1, 1}, 0, false},
