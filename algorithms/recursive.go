@@ -59,6 +59,24 @@ func Permutation(data []int, i int, length int) [][]int {
 	return s
 }
 
+// BinarySearchRecursive recusively searches for a value in an increasing order sorted list of integers.
+// low - minimum index of array, always 0, high maximum index of array, is amount of elements of array - 1, value - desired value
+// returns index of the value we are looking for and if that not found returns -1
+func BinarySearchRecursive(data []int, low int, high int, value int) int {
+
+	if low > high {
+		return -1
+	}
+	mid := low + (high-low)/2 // To afunc the overflow
+	if data[mid] == value {
+		return mid
+	} else if data[mid] < value {
+		return BinarySearchRecursive(data, mid+1, high, value)
+	} else {
+		return BinarySearchRecursive(data, low, mid-1, value)
+	}
+}
+
 func tohUtil(num int, from string, to string, temp string) string {
 	var result string
 

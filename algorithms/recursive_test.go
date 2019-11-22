@@ -143,3 +143,42 @@ func TestPermutation(t *testing.T) {
 		}
 	}
 }
+func TestBinarySearchRecursive(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		low    int
+		high   int
+		item   int
+		result int
+	}
+
+	var tests = []testelements{
+		// {[]int{1, 2}, 0, 1, 3, -1},
+		// {[]int{-6, 1, 1, 1, 1, 1, 1}, 0, 6, 3, -1},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, 0, 6, -6, 0},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, 0, 6, 1, 3}, //  the result may be inaccurate due to several identical values satisfying the condition
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 0, 6, 3, 2},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 0, 6, 5, 4},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8}, 0, 7, 8, 7},
+		{[]int{-1, 1}, 0, 1, 3, -1},
+		{[]int{-1, 1}, 0, 1, -1, 0},
+		{[]int{0, 0}, 0, 1, 3, -1},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 0, 7, 3, -1},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 0, 7, 110, 3},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 0, 7, 300, 6},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 0, 7, 780, 7},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 0, 7, -321, 1},
+	}
+
+	for _, element := range tests {
+		v := BinarySearchRecursive(element.values, element.low, element.high, element.item)
+		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
