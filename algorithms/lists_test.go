@@ -79,7 +79,7 @@ func TestBinarySearch(t *testing.T) {
 	}
 
 	for _, element := range tests {
-		v := SequentialSearch(element.values, element.item)
+		v := BinarySearch(element.values, element.item)
 		if v != element.result {
 			t.Error(
 				"For", element.values,
