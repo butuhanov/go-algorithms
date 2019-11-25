@@ -14,6 +14,10 @@ func SumList(data []int) int {
 // SequentialSearch - look up the value in unknown array
 // we do not have information about the structure of the array, so we sequentially look for the element one by one
 // This is suitable if the data is not sorted. If the data is sorted, a binary search can be used.
+//  scan the full list unless we find the desired value.
+// Time Complexity: O(n). As we need to traverse the complete list in worst case.
+// the size of the list.
+// Space Complexity: O(1). No extra memory is used to allocate the list.
 func SequentialSearch(data []int, value int) bool {
 	size := len(data)
 	for i := 0; i < size; i++ {
