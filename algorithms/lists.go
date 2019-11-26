@@ -30,6 +30,8 @@ func SequentialSearch(data []int, value int) bool {
 
 // BinarySearch looking up the value in the sorted array
 // We examine the middle position at each step. Depending upon the data that we are searching is greater or smaller than the middle value. We will search either the left or the right portion of the array. At each step, we are eliminating half of the search space there by making this algorithm very efficient.
+// Time Complexity: O(logn). We always take half input and throwing out the other half. So the recurrence relation for binary search is T(n) = T(n/2) + c. Using master theorem (divide and conquer), we get T(n) = O(logn)
+// Space Complexity: O(1)
 func BinarySearch(data []int, value int) bool {
 	size := len(data)
 	var mid int

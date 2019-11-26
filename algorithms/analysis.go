@@ -5,9 +5,9 @@ import (
 )
 
 // Analyse - an example of evaluating the time efficiency of algorithms
-func Analyse (f func(int) int, x int) int {
+func Analyse(f func(int) int, x int) int {
 
-return f(x)
+	return f(x)
 
 }
 

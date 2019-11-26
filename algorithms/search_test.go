@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -24,8 +25,38 @@ func TestLinearSearchSorted(t *testing.T) {
 	}
 
 	for _, element := range tests {
-		v := BinarySearch(element.values, element.item)
+		v := LinearSearchSorted(element.values, element.item)
 		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+func TestFindDublicatesExhaustive(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		result []int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, []int{}},
+		{[]int{3, 1, 2, 1, 4, 7, 1}, []int{1}},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, []int{1}},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, []int{}},
+		{[]int{1, 2, 3, 4, 3, 6, 7}, []int{3}},
+		{[]int{-1, 1}, []int{}},
+		{[]int{0, 0}, []int{0}},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, []int{}},
+		{[]int{-400, -321, 1, 700, -110, 145, -234, -321, 780, 700}, []int{-321, 700}},
+	}
+
+	for _, element := range tests {
+		v := FindDublicatesExhaustive(element.values)
+		if !reflect.DeepEqual(v, element.result) {
 			t.Error(
 				"For", element.values,
 				"expected", element.result,
