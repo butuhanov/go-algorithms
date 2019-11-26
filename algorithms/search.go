@@ -43,6 +43,7 @@ func FindDublicatesExhaustive(data []int) []int {
 }
 
 // FindDublicatesSorting - finds dublicates in the list using an sorting first approach
+// Sort all the elements in the list and after this in a single scan, we can find the duplicates.
 // result - a list of numbers that appears in the list more than once in sorted order
 // Sorting algorithms take O(n log n) time and single scan take O(n) time.
 // The Time Complexity of an algorithm is O(n log n) and Space Complexity is O(1)
@@ -55,6 +56,52 @@ func FindDublicatesSorting(data []int) []int {
 			if !SequentialSearch(result, data[i]) { // check if there is already an item as a result to eliminate dublicates
 				result = append(result, data[i])
 			}
+		}
+	}
+	return result
+}
+
+// FindDublicatesHashTable - finds dublicates in the list using hash table
+// using Hash-Table, we can keep track of the elements we have already seen and we can find the duplicates in just one scan.
+// Hash-Table insert and find take constant time O(1)
+// so the total Time Complexity of the algorithm is O(n) time. Space Complexity is also O(n)
+// in func below error undefined: Set
+// func FindDublicatesHashTable(data []int) {
+// 	s := make(Set)
+// 	s := make(map[int]int)
+// 	size := len(data)
+// 	result := []int{}
+// 	for i := 0; i < size; i++ {
+// 		if s.Find(data[i]) {
+// 			fmt.Print(" ", data[i])
+// 		} else {
+// 			s.Add(data[i])
+// 		}
+// 	}
+// 	return result
+// }
+
+// FindDublicatesCounting - finds dublicates in the list using counting
+// this approach is only possible if we know the range of the input.
+// If we know that, the elements in the list are in the range 0 to n-1. We can reserve a list of length n and when we see an element, we can increase its count. In just one single scan, we know the duplicates. If we know the range of the elements, then this is the fastest way to find the duplicates.
+// intrange is the maximum number of the array plus one
+// data - is the array of positive integers
+func FindDublicatesCounting(data []int, intrange int) []int {
+	size := len(data)
+	result := []int{}
+	count := make([]int, intrange) // create a slice with length intrange
+
+	// for i := 0; i < size; i++ {
+	// 	count[i] = 0 // fill count with nulls
+	// }
+
+	for i := 0; i < size; i++ {
+		if count[data[i]] == 1 {
+			if !SequentialSearch(result, data[i]) { // check if there is already an item as a result to eliminate dublicates
+				result = append(result, data[i])
+			}
+		} else {
+			count[data[i]]++
 		}
 	}
 	return result
