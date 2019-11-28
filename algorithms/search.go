@@ -107,7 +107,7 @@ func FindDublicatesCounting(data []int, intrange int) []int {
 	return result
 }
 
-// GetMaxAppearing - returns the element that appears maximum number of times in the given list of integers.
+// GetMaxAppearingExhaustive - returns the element that appears maximum number of times in the given list of integers.
 func GetMaxAppearingExhaustive(data []int) int {
 	size := len(data)
 	max := data[0]
