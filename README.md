@@ -4,9 +4,6 @@
 
 https://github.com/butuhanov/go-algorithms
 
-TODO
+Here is just a set of different algorithms written in Go sorted by topic.
 
-Замена строки
-
-Strings are immutable so you cannot change its content once created. You need to first convert into a slice of rune then do the changes and in the end convert it back to string.
-
+It can be used for educational purposes.
