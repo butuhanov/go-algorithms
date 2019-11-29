@@ -154,3 +154,20 @@ func GetMaxAppearingSorting(data []int) int {
 	}
 	return max
 }
+
+// GetMaxAppearingCounting - returns the element that appears maximum number of times in the given list of integers using counting.
+// If we know that, the elements in the list are in the range 0 to n-1. We can reserve a list of length n and when we see an element, we can increase its count. In just one single scan, we know the duplicates. If we know the range of the elements, then this is the fastest way to find the max count.
+func GetMaxAppearingCounting(data []int, dataRange int) int {
+max := data[0]
+maxCount := 1
+size := len(data)
+count := make([]int, dataRange)
+for i := 0; i < size; i++ {
+count[data[i]]++
+if count[data[i]] > maxCount {
+maxCount = count[data[i]]
+max = data[i]
+}
+}
+return max
+}

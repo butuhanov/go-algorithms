@@ -204,3 +204,44 @@ func TestGetMaxAppearingSorting(t *testing.T) {
 		}
 	}
 }
+
+func TestGetMaxAppearingCounting(t *testing.T) {
+
+	type testelements struct {
+		values    []int
+		dataRange int
+		result    int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 3, 1},
+		{[]int{3, 2, 1}, 4, 3},
+		{[]int{1, 2, 3}, 4, 1},
+		{[]int{3, 1, 2}, 4, 3},
+		{[]int{1, 1, 2, 2}, 3, 1},
+		{[]int{2, 2, 1, 1}, 3, 2},
+		{[]int{2, 2, 2, 1}, 3, 2},
+		{[]int{3, 1, 2, 1, 4, 7, 1}, 8, 1},
+		{[]int{6, 1, 1, 1, 1, 1, 1}, 7, 1},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 8, 1},
+		{[]int{1, 2, 3, 4, 3, 6, 7}, 8, 3},
+		{[]int{1, 2, 3, 4, 3, 6, 7, 7, 4, 6, 4}, 8, 4},
+		{[]int{3, 2, 1, 4, 3, 6, 7, 8, 1, 6, 3, 0}, 9, 3},
+		{[]int{1, 1}, 2, 1},
+		{[]int{0, 0}, 1, 0},
+		{[]int{1, 0, 0}, 2, 0},
+		{[]int{400, 321, 1, 110, 145, 234, 300, 780}, 781, 400},
+		{[]int{400, 321, 1, 700, 110, 145, 234, 321, 780, 700}, 781, 321},
+	}
+
+	for _, element := range tests {
+		v := GetMaxAppearingCounting(element.values, element.dataRange)
+		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
