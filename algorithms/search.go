@@ -107,7 +107,9 @@ func FindDublicatesCounting(data []int, intrange int) []int {
 	return result
 }
 
-// GetMaxAppearingExhaustive - returns the element that appears maximum number of times in the given list of integers.
+// GetMaxAppearingExhaustive - returns the element that appears maximum number of times in the given list of integers using bruteforce.
+// if more than one element is found, the first is returned
+// if no items are found, the first is returned
 func GetMaxAppearingExhaustive(data []int) int {
 	size := len(data)
 	max := data[0]
@@ -123,6 +125,31 @@ func GetMaxAppearingExhaustive(data []int) int {
 		if count > maxCount {
 			max = data[i]
 			maxCount = count
+		}
+	}
+	return max
+}
+
+// GetMaxAppearingSorting - returns the element that appears maximum number of times in the given list of integers using sorting.
+// if more than one element is found, the first minimal is returned
+// if no items are found, the first minimal is returned
+func GetMaxAppearingSorting(data []int) int {
+	size := len(data)
+	sort.Ints(data) // Sort(data,size)
+	max := data[0]
+	maxCount := 1
+	curr := data[0]
+	currCount := 1
+	for i := 1; i < size; i++ {
+		if data[i] == data[i-1] {
+			currCount++
+		} else {
+			currCount = 1
+			curr = data[i]
+		}
+		if currCount > maxCount {
+			maxCount = currCount
+			max = curr
 		}
 	}
 	return max

@@ -148,12 +148,53 @@ func TestGetMaxAppearingExhaustive(t *testing.T) {
 		{[]int{3, 2, 1, 4, 3, 6, 7, 8, 1, 6, 3, 0}, 3},
 		{[]int{-1, 1}, -1},
 		{[]int{0, 0}, 0},
+		{[]int{1, 0, 0}, 0},
 		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, -400},
 		{[]int{-400, -321, 1, 700, -110, 145, -234, -321, 780, 700}, -321},
 	}
 
 	for _, element := range tests {
 		v := GetMaxAppearingExhaustive(element.values)
+		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+
+func TestGetMaxAppearingSorting(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		result int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 1},
+		{[]int{3, 2, 1}, 1},
+		{[]int{1, 2, 3}, 1},
+		{[]int{3, 1, 2}, 1},
+		{[]int{1, 1, 2, 2}, 1},
+		{[]int{2, 2, 1, 1}, 1},
+		{[]int{2, 2, 2, 1}, 2},
+		{[]int{3, 1, 2, 1, 4, 7, 1}, 1},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, 1},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 1},
+		{[]int{1, 2, 3, 4, 3, 6, 7}, 3},
+		{[]int{1, 2, 3, 4, 3, 6, 7, 7, 4, 6, 4}, 4},
+		{[]int{3, 2, 1, 4, 3, 6, 7, 8, 1, 6, 3, 0}, 3},
+		{[]int{-1, 1}, -1},
+		{[]int{0, 0}, 0},
+		{[]int{1, 0, 0}, 0},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, -400},
+		{[]int{-400, -321, 1, 700, -110, 145, -234, -321, 780, 700}, -321},
+	}
+
+	for _, element := range tests {
+		v := GetMaxAppearingSorting(element.values)
 		if v != element.result {
 			t.Error(
 				"For", element.values,
