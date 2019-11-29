@@ -283,7 +283,7 @@ func FindMissingNumberCounting(data []int) (int, bool) {
 func FindMissingNumberSummation(data []int) (int, bool) {
 	var count int
 	size := len(data)
-	sum := (1 + size + 1) * (size + 1) / 2
+	sum := (1 + size + 1) * (size + 1) / 2 // the sum of arithmetic progression
 	for i := 0; i < size; i++ {
 		count += data[i]
 	}
@@ -293,4 +293,30 @@ func FindMissingNumberSummation(data []int) (int, bool) {
 	}
 	return sum - count, true
 
+}
+
+// FindMissingNumberXOR  finds missing number in array using XOR approach
+//  XOR approach to find the sum of n numbers from 1 to n.
+// the values stored in the list and you will have your missing number. The Time Complexity of this algorithm is O(n). Space Complexity is O(1)
+func FindMissingNumberXOR(data []int) (int, bool) {
+	size := len(data)
+	xorSumRange := 0
+	xorSumNumbers := 0
+
+	// get the XOR of all the numbers from 1 to dataRange
+	for i := 1; i <= size; i++ {
+		xorSumRange ^= i
+	}
+
+	// loop through the array and get the XOR of elements
+	for i := 0; i < size; i++ {
+		xorSumNumbers ^= data[i]
+
+	}
+
+	if xorSumRange == xorSumNumbers {
+		return 0, false
+	}
+	// fmt.Println(size, xorSumRange, xorSumNumbers)
+	return xorSumNumbers, true
 }
