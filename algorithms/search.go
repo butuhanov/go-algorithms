@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	// "fmt"
 	"sort"
 )
 
@@ -185,7 +186,7 @@ func GetMajorityExhaustive(data []int) (int, bool) {
 	return max, false
 }
 
-// MooresVotingAlgorithm - implements Moore’s Voting Algorithm, is an algorithm for finding the majority of a sequence of elements using linear time and constant space (see also https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm)
+// MooresVotingAlgorithm - implements Moore’s Voting Algorithm, is an algorithm for finding the majority of a sequence of elements using linear time and constant space (see also https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm)  This is a cancelation approach. The elements stand against the majority and each element is cancelled with one element of majority if there is majority then majority prevails.
 func MooresVotingAlgorithm(data []int) (int, bool) {
 	majIndex := 0
 	count := 1
@@ -214,4 +215,26 @@ func MooresVotingAlgorithm(data []int) (int, bool) {
 		return data[majIndex], true
 	}
 	return 0, false
+}
+
+// FindMissingNumberExhaustive finds missing number in array using brute force
+// Given a list of n-1 elements, which are in the range of 1 to n. There are no duplicates in the list. One of the integer is missing. Find the missing element.
+// First loop to select value in the range 1 to n and the second loop to find if this element is in the list or not.
+// The Time Complexity is O(n2) and Space Complexity is O(1)
+func FindMissingNumberExhaustive(data []int) (int, bool) {
+	var found int
+	size := len(data)
+	for i := 1; i <= size; i++ {
+		found = 0
+		for j := 0; j < size; j++ {
+			if data[j] == i {
+				found = 1
+				break
+			}
+		}
+		if found == 0 {
+			return i, true
+		}
+	}
+	return 0, false // fmt.Println("NoNumberMissing")
 }
