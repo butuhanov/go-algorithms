@@ -262,14 +262,48 @@ func TestGetMajorityExhaustive(t *testing.T) {
 		{[]int{1, 2, 3, 4, 3, 6, 7}, 3, false},
 		{[]int{3, 2, 1, 4, 3, 6, 7, 8, 1, 6, 3, 0}, 3, false},
 		{[]int{-1, 1}, -1, false},
-		{[]int{0, 0}, 0, false},
-		{[]int{1, 0, 0}, 0, false},
+		{[]int{0, 0}, 0, true},
+		{[]int{1, 0, 0}, 0, true},
 		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, -400, false},
 		{[]int{-400, -321, 1, 700, -110, 145, -234, -321, 780, 700}, -321, false},
 	}
 
 	for _, element := range tests {
 		v, ok := GetMajorityExhaustive(element.values)
+		if v != element.resultInt || ok != element.resultBool {
+			t.Error(
+				"For", element.values,
+				"expected", element.resultInt, element.resultBool,
+				"got", v, ok,
+			)
+		}
+	}
+}
+
+func TestMooresVotingAlgorithm(t *testing.T) {
+
+	type testelements struct {
+		values     []int
+		resultInt  int
+		resultBool bool
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, false},
+		{[]int{3, 1, 2, 1, 4, 7, 1}, 0, false},
+		{[]int{-6, 1, 1, 1, 1, 1, 1}, 1, true},
+		{[]int{1, 2, 3, 4, 5, 6, 7}, 0, false},
+		{[]int{1, 2, 3, 4, 3, 6, 7}, 0, false},
+		{[]int{3, 2, 1, 4, 3, 6, 7, 8, 1, 6, 3, 0}, 0, false},
+		{[]int{-1, 1}, 0, false},
+		{[]int{0, 0}, 0, true},
+		{[]int{1, 0, 0}, 0, true},
+		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 0, false},
+		{[]int{-400, -321, 1, 700, -110, 145, -234, -321, 780, 700}, 0, false},
+	}
+
+	for _, element := range tests {
+		v, ok := MooresVotingAlgorithm(element.values)
 		if v != element.resultInt || ok != element.resultBool {
 			t.Error(
 				"For", element.values,
