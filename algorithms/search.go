@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -272,10 +271,26 @@ func FindMissingNumberCounting(data []int) (int, bool) {
 	// fmt.Println(count)
 	for i := 1; i < size+1; i++ { // ignore the first and last elements
 		// fmt.Println(i, data[i], count[data[i]])
-		fmt.Println(count[i])
 		if count[i] == 0 {
 			return i, true
 		}
 	}
 	return 0, false
+}
+
+// FindMissingNumberSummation  finds missing number in array using summation approach
+// Arithmetic progression . The sum is (a1+an)*n/2
+func FindMissingNumberSummation(data []int) (int, bool) {
+	var count int
+	size := len(data)
+	sum := (1 + size + 1) * (size + 1) / 2
+	for i := 0; i < size; i++ {
+		count += data[i]
+	}
+	// fmt.Println(size, sum, count, sum-size-1)
+	if sum-size-1 == count {
+		return 0, false
+	}
+	return sum - count, true
+
 }
