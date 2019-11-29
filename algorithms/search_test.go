@@ -379,3 +379,35 @@ func TestFindMissingNumberSorting(t *testing.T) {
 		}
 	}
 }
+
+func TestFindMissingNumberCounting(t *testing.T) {
+
+	type testelements struct {
+		values     []int
+		resultInt  int
+		resultBool bool
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, false},
+		{[]int{3, 1, 2, 6, 4, 7, 5}, 0, false},
+		{[]int{6, 4, 5, 2, 1, 7}, 3, true},
+		{[]int{1, 2, 3, 5, 6}, 4, true},
+		{[]int{1, 2, 3, 4, 6, 7}, 5, true},
+		{[]int{3, 2, 1, 4, 5, 7, 9, 6, 10, 11}, 8, true},
+		{[]int{1, 3}, 2, true},
+		{[]int{1, 4, 3}, 2, true},
+		{[]int{1, 2, 4}, 3, true},
+	}
+
+	for _, element := range tests {
+		v, ok := FindMissingNumberCounting(element.values)
+		if v != element.resultInt || ok != element.resultBool {
+			t.Error(
+				"For", element.values,
+				"expected", element.resultInt, element.resultBool,
+				"got", v, ok,
+			)
+		}
+	}
+}

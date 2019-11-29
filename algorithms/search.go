@@ -1,7 +1,7 @@
 package algorithms
 
 import (
-	// "fmt"
+	"fmt"
 	"sort"
 )
 
@@ -252,4 +252,30 @@ func FindMissingNumberSorting(data []int) (int, bool) {
 
 	}
 	return 0, false // fmt.Println("NoNumberMissing")
+}
+
+// FindMissingNumberHashTable finds missing number in array using hash table
+// Hash-Table insert and find take constant time O(1) so the total Time Complexity of the algorithm is O(n) time. Space Complexity is also O(n)
+// TODO
+
+// FindMissingNumberCounting finds missing number in array using counting approach
+// we know the range of the input so counting will work. As we know that, the elements in the list are in the range 0 to n-1. We can reserve a list of length n and when we see an element, we can increase its count. In just one single scan, we know the missing element.
+// Counting approach just uses a list so insert and find take constant time O(1) so the total Time Complexity of the algorithm is O(n) time. Space Complexity for creating count list is also O(n)
+func FindMissingNumberCounting(data []int) (int, bool) {
+	size := len(data)
+	count := make([]int, size+2) // the range of 1 to n
+	// fmt.Println(count)
+	for i := 0; i < size; i++ {
+		count[data[i]]++
+	}
+	// fmt.Println(size)
+	// fmt.Println(count)
+	for i := 1; i < size+1; i++ { // ignore the first and last elements
+		// fmt.Println(i, data[i], count[data[i]])
+		fmt.Println(count[i])
+		if count[i] == 0 {
+			return i, true
+		}
+	}
+	return 0, false
 }
