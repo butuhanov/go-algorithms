@@ -238,3 +238,18 @@ func FindMissingNumberExhaustive(data []int) (int, bool) {
 	}
 	return 0, false // fmt.Println("NoNumberMissing")
 }
+
+// FindMissingNumberSorting finds missing number in array using sorting
+// Sorting algorithms take O(n.logn) time and single scan take O(n) time.
+// The Time Complexity of an algorithm is O(n.logn) and Space Complexity is O(1)
+func FindMissingNumberSorting(data []int) (int, bool) {
+	size := len(data)
+	sort.Ints(data) // Sort(data,size)
+	for i := 1; i <= (size - 1); i++ {
+		if data[i-1] != data[i]-1 {
+			return data[i] - 1, true
+		}
+
+	}
+	return 0, false // fmt.Println("NoNumberMissing")
+}
