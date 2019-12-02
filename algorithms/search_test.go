@@ -499,7 +499,38 @@ func TestFindPairExhaustive(t *testing.T) {
 		{[]int{6, 4, 5, 2, 1, 7}, 3, true},
 		{[]int{1, 2, 3, 5, 6}, 4, true},
 		{[]int{1, 2, 3, 4, 6, 7}, 5, true},
-		{[]int{3, 2, 1, 4, 5, 7, 9, 6, 10, 11}, 7, false},
+		{[]int{3, 2, 1, 4, 5, 7, 9, 6, 10, 11}, 7, true},
+		{[]int{1, 3}, 2, false},
+		{[]int{1, 4, 3}, 2, false},
+		{[]int{1, 2, 4}, 3, true},
+	}
+
+	for _, element := range tests {
+		v := FindPairExhaustive(element.values, element.value)
+		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+func TestFindPairSorting(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		value  int
+		result bool
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, false},
+		{[]int{3, 1, 2, 6, 4, 7, 5}, 0, false},
+		{[]int{6, 4, 5, 2, 1, 7}, 3, true},
+		{[]int{1, 2, 3, 5, 6}, 4, true},
+		{[]int{1, 2, 3, 4, 6, 7}, 5, true},
+		{[]int{3, 2, 1, 4, 5, 7, 9, 6, 10, 11}, 7, true},
 		{[]int{1, 3}, 2, false},
 		{[]int{1, 4, 3}, 2, false},
 		{[]int{1, 2, 4}, 3, true},

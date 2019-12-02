@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -338,6 +337,28 @@ func FindPairExhaustive(data []int, value int) bool {
 				// fmt.Println("The pair is : ", data[i], ",", data[j])
 				ret = true
 			}
+		}
+	}
+	return ret
+}
+
+// FindPairSorting - finds a pair using sorting approach
+func FindPairSorting(data []int, value int) bool {
+	size := len(data)
+	first := 0
+	second := size - 1
+	ret := false
+	sort.Ints(data) // Sort(data, size)
+	for first < second {
+		curr := data[first] + data[second]
+		if curr == value {
+			// fmt.Println("The pair is ", data[first], ",", data[second])
+			ret = true
+		}
+		if curr < value {
+			first++
+		} else {
+			second--
 		}
 	}
 	return ret
