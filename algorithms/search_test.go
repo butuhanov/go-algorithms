@@ -537,12 +537,45 @@ func TestFindPairSorting(t *testing.T) {
 	}
 
 	for _, element := range tests {
-		v := FindPairExhaustive(element.values, element.value)
+		v := FindPairSorting(element.values, element.value)
 		if v != element.result {
 			t.Error(
 				"For", element.values,
 				"expected", element.result,
 				"got", v,
+			)
+		}
+	}
+}
+
+func TestFindMinAbsSumPair(t *testing.T) {
+
+	type testelements struct {
+		values  []int
+		result1 int
+		result2 int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 1, 2},
+		{[]int{3, 1, 2, 6, -4, 7, 5}, 3, -4},
+		{[]int{6, 4, -5, -2, 1, 7}, 6, -5},
+		{[]int{1, 2, -3, 5, 6}, 2, -3},
+		{[]int{1, 2, 3, 4, 6, 7}, 1, 2},
+		{[]int{3, 2, 1, 4, 5, 7, 9, 6, 10, 11}, 2, 1},
+		{[]int{223, 22, 112, 224, 225, 72, 92, 26, 102, 121}, 22, 26},
+		{[]int{1, 3}, 1, 3},
+		{[]int{1, 4, 3}, 1, 3},
+		{[]int{1, 2, 4}, 1, 2},
+	}
+
+	for _, element := range tests {
+		res1, res2 := FindMinAbsSumPair(element.values)
+		if res1 != element.result1 || res2 != element.result2 {
+			t.Error(
+				"For", element.values,
+				"expected", element.result1, element.result2,
+				"got", res1, res2,
 			)
 		}
 	}

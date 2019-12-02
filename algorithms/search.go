@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -362,4 +363,56 @@ func FindPairSorting(data []int, value int) bool {
 		}
 	}
 	return ret
+}
+
+// FindPairHashTable - finds a pair using hash tables
+// using Hash-Table, we can keep track of the elements we have already seen and we can find the pair in just one scan.
+// Hash-Table insert and find take constant time O(1) so the total Time Complexity of the algorithm is O(n) time. Space Complexity is also O(n)
+// func FindPairHashTable(data []int, value int) bool {
+// 	s := make(Set)
+// 	size := len(data)
+// 	ret := false
+// 	for i := 0; i < size; i++ {
+// 		if s.Find(value - data[i]) {
+// 			fmt.Println(i, "The pair is:", data[i], ",", (value - data[i]))
+// 			ret = true
+// 		} else {
+// 			s.Add(data[i])
+// 		}
+// 	}
+// 	return ret
+// }
+
+// FindMinAbsSumPair finds two elements whose sum is closest to zero
+// Given a List of integers, both +ve and -ve. You need to find the two elements such that their sum is closest to zero.
+func FindMinAbsSumPair(data []int) (value1, value2 int) {
+	var sum int
+	size := len(data)
+	// Array should have at least two elements
+	if size < 2 {
+		fmt.Println("InvalidInput")
+	}
+	// Initialization of values
+	minFirst := 0
+	minSecond := 1
+	minSum := data[0] + data[1]
+	if minSum < 0 {
+		minSum *= -1
+	}
+	for l := 0; l < size-1; l++ {
+		for r := l + 1; r < size; r++ {
+			sum = data[l] + data[r]
+			if sum < 0 {
+				sum *= -1
+			}
+			if sum < minSum {
+				minSum = sum
+				minFirst = l
+				minSecond = r
+			}
+		}
+	}
+	// fmt.Println(" The two elements with minimum sum are : ", data[minFirst], " , ",
+	// 	data[minSecond])
+	return data[minFirst], data[minSecond]
 }
