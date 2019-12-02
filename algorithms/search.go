@@ -383,9 +383,9 @@ func FindPairSorting(data []int, value int) bool {
 // 	return ret
 // }
 
-// FindMinAbsSumPair finds two elements whose sum is closest to zero
+// FindMinAbsSumPairExhaustive finds two elements whose sum is closest to zero
 // Given a List of integers, both +ve and -ve. You need to find the two elements such that their sum is closest to zero.
-func FindMinAbsSumPair(data []int) (value1, value2 int) {
+func FindMinAbsSumPairExhaustive(data []int) (value1, value2 int) {
 	var sum int
 	size := len(data)
 	// Array should have at least two elements
@@ -414,5 +414,45 @@ func FindMinAbsSumPair(data []int) (value1, value2 int) {
 	}
 	// fmt.Println(" The two elements with minimum sum are : ", data[minFirst], " , ",
 	// 	data[minSecond])
+	return data[minFirst], data[minSecond]
+}
+
+// FindMinAbsSumPairSorting finds two elements whose sum is closest to zero using sorting approach
+func FindMinAbsSumPairSorting(data []int) (value1, value2 int) {
+	var sum int
+	size := len(data)
+	// Array should have at least two elements
+	if size < 2 {
+		fmt.Println("InvalidInput")
+	}
+	sort.Ints(data) // Sort(data, size)
+	// Initialization of values
+	minFirst := 0
+	minSecond := size - 1
+	minSum := data[minFirst] + data[minSecond]
+	if minSum < 0 {
+		minSum *= -1
+	}
+	for l, r := 0, (size - 1); l < r; {
+		sum = (data[l] + data[r])
+		if sum < 0 {
+			sum *= -1
+		}
+		if sum < minSum {
+			minSum = sum
+			minFirst = l
+			minSecond = r
+		}
+		if sum < 0 {
+			l++
+		} else if sum > 0 {
+
+			r--
+		} else {
+			break
+		}
+	}
+	fmt.Println(" The two elements with minimum sum are : ", data[minFirst], " , ",
+		data[minSecond])
 	return data[minFirst], data[minSecond]
 }
