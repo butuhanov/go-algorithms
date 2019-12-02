@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -319,4 +320,25 @@ func FindMissingNumberXOR(data []int) (int, bool) {
 	}
 	// fmt.Println(size, xorSumRange, xorSumNumbers)
 	return xorSumNumbers, true
+}
+
+// TODO
+// 1. There are numbers in the range of 1-n out of which all appears single time but one that appear two times.
+// 2. All the elements in the range 1-n are appearing 16 times and one element appear 17 times. Find the element that appears 17 times.
+
+//
+// FindPairExhaustive - finds a pair using exhaustive search, returns true if the pair exists. In a given list of n numbers, find two elements such that their sum is equal to “value”
+// The Time Complexity is O(n2) and Space Complexity is O(1)
+func FindPairExhaustive(data []int, value int) bool {
+	size := len(data)
+	ret := false
+	for i := 0; i < size; i++ {
+		for j := i + 1; j < size; j++ {
+			if (data[i] + data[j]) == value {
+				// fmt.Println("The pair is : ", data[i], ",", data[j])
+				ret = true
+			}
+		}
+	}
+	return ret
 }
