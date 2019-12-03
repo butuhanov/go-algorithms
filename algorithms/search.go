@@ -589,3 +589,15 @@ func FindLastSortedIndex(data []int, start int, end int, key int) int {
 	}
 	return FindLastSortedIndex(data, mid+1, end, key)
 }
+
+// OccurrenceCountSorted searches the number of items in a sorted list
+func OccurrenceCountSorted(data []int, key int) int {
+	size := len(data)
+	firstIndex := FindFirstSortedIndex(data, 0, size-1, key)
+	lastIndex := FindLastSortedIndex(data, 0, size-1, key)
+	// fmt.Println(firstIndex, lastIndex)
+	if lastIndex == -1 && firstIndex == -1 {
+		return 0
+	}
+	return (lastIndex - firstIndex + 1)
+}

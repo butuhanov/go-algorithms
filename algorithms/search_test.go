@@ -760,3 +760,34 @@ func TestFindLastSortedIndex(t *testing.T) {
 		}
 	}
 }
+
+func TestOccurrenceCountSorted(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		key    int
+		result int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 3, 0},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 9, 1},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 2, 1},
+		{[]int{1, 1, 1, 4, 5, 6, 7, 8, 9, 10}, 1, 3},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 4, 5},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 5, 0},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 72, 1},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 85, 1},
+	}
+
+	for _, element := range tests {
+		v := OccurrenceCountSorted(element.values, element.key)
+		if v != element.result {
+			t.Error(
+				"For", element.values, "find", element.key,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
