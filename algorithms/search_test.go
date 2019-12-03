@@ -761,7 +761,7 @@ func TestFindLastSortedIndex(t *testing.T) {
 	}
 }
 
-func TestOccurrenceCountSorted(t *testing.T) {
+func TestOccurrenceCount(t *testing.T) {
 
 	type testelements struct {
 		values []int
@@ -774,17 +774,52 @@ func TestOccurrenceCountSorted(t *testing.T) {
 		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 9, 1},
 		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 2, 1},
 		{[]int{1, 1, 1, 4, 5, 6, 7, 8, 9, 10}, 1, 3},
+		{[]int{10, 1, 3, 4, 15, 64, 1, 28, 19, 1}, 1, 3},
 		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 4, 5},
 		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 5, 0},
+		{[]int{1, 1, 1, 4, 4, 2, 4, 4, 9, 10, 1, 12, 33, -3, 112, 44, -323, -22, 12, -3, 4}, 4, 5},
+		{[]int{1, 1, 1, 4, 4, 2, 4, 4, 9, 10, 1, 12, 33, -3, 112, 44, -323, -22, 12, -3, 4}, 1, 4},
+		{[]int{1, 1, 1, 4, 4, 2, 4, 4, 9, 10, 1, 12, 33, -3, 112, 44, -323, -22, 12, -3, 4}, -3, 2},
 		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 72, 1},
+		{[]int{1, 22, 132, 433, 54, 65, 172, 815, 197, 132}, 132, 2},
 		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 85, 1},
 	}
 
 	for _, element := range tests {
-		v := OccurrenceCountSorted(element.values, element.key)
+		v := OccurrenceCount(element.values, element.key)
 		if v != element.result {
 			t.Error(
 				"For", element.values, "find", element.key,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+
+func TestSeperateEvenAndOdd(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		result []int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, []int{2, 1}},
+		{[]int{1, 2, -3, 4, 5, -6}, []int{-6, 2, 4, -3, 5, 1}},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, []int{10, 2, 8, 4, 6, 5, 7, 3, 9, 1}},
+		{[]int{10, 1, 3, 4, 15, 64, 1, 28, 19, 1}, []int{10, 28, 64, 4, 15, 3, 1, 1, 19, 1}},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, []int{10, 2, 4, 4, 4, 4, 4, 3, 9, 1}},
+		{[]int{1, 1, 1, 4, 4, 2, 4, 10, 1, 12, 33, -3, 112, 44, -323, -22, 12, -3, 4}, []int{4, 12, -22, 4, 4, 2, 4, 10, 44, 12, 112, -3, 33, 1, -323, 1, 1, -3, 1}},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, []int{132, 2, 72, 54, 43, 65, 31, 85, 97, 1}},
+		{[]int{1, 22, 132, 433, 54, 65, 172, 815, 197, 132}, []int{132, 22, 132, 172, 54, 65, 433, 815, 197, 1}},
+	}
+
+	for _, element := range tests {
+		v := SeperateEvenAndOdd(element.values)
+		if !reflect.DeepEqual(v, element.result) {
+			t.Error(
+				"For", element.values,
 				"expected", element.result,
 				"got", v,
 			)

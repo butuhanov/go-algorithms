@@ -590,9 +590,10 @@ func FindLastSortedIndex(data []int, start int, end int, key int) int {
 	return FindLastSortedIndex(data, mid+1, end, key)
 }
 
-// OccurrenceCountSorted searches the number of items in a sorted list
-func OccurrenceCountSorted(data []int, key int) int {
+// OccurrenceCount searches the number of items in a sorted list
+func OccurrenceCount(data []int, key int) int {
 	size := len(data)
+	sort.Ints(data) // Sort(data, size)
 	firstIndex := FindFirstSortedIndex(data, 0, size-1, key)
 	lastIndex := FindLastSortedIndex(data, 0, size-1, key)
 	// fmt.Println(firstIndex, lastIndex)
@@ -600,4 +601,24 @@ func OccurrenceCountSorted(data []int, key int) int {
 		return 0
 	}
 	return (lastIndex - firstIndex + 1)
+}
+
+// SeperateEvenAndOdd separates even numbers from odd numbers
+func SeperateEvenAndOdd(data []int) []int {
+	size := len(data)
+	left := 0
+	right := size - 1
+	for left < right {
+		// fmt.Println(data[left], data[right], data[left]%2, data[right]%2)
+		if data[left]%2 == 0 {
+			left++
+		} else if data[right]%2 == 1 || data[right]%2 == -1 {
+			right--
+		} else {
+			data[left], data[right] = data[right], data[left] // swap
+			left++
+			right--
+		}
+	}
+	return data
 }
