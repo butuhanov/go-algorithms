@@ -689,3 +689,74 @@ func TestSearchBitonicArray(t *testing.T) {
 		}
 	}
 }
+func TestFindFirstSortedIndex(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		start  int
+		end    int
+		key    int
+		result int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, 1, 3, -1},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 0, 9, 9, 8},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 0, 7, 9, -1},
+		{[]int{1, 1, 1, 4, 5, 6, 7, 8, 9, 10}, 0, 7, 1, 0},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 0, 7, 4, 3},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 5, 7, 4, 5},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 0, 7, 72, 6},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 0, 7, 85, 7},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 0, 7, 97, -1},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 5, 7, 43, -1},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 3, 7, 43, 3},
+	}
+
+	for _, element := range tests {
+		v := FindFirstSortedIndex(element.values, element.start, element.end, element.key)
+		if v != element.result {
+			t.Error(
+				"For", element.values, "find", element.key,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+
+func TestFindLastSortedIndex(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		start  int
+		end    int
+		key    int
+		result int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, 1, 3, -1},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 0, 9, 9, 8},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 0, 7, 9, -1},
+		{[]int{1, 1, 1, 4, 5, 6, 7, 8, 9, 10}, 0, 7, 1, 2},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 0, 7, 4, 7},
+		{[]int{1, 2, 3, 4, 4, 4, 4, 4, 9, 10}, 5, 6, 4, 6},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 0, 7, 72, 6},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 0, 7, 85, 7},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 0, 7, 97, -1},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 5, 7, 43, -1},
+		{[]int{1, 2, 31, 43, 54, 65, 72, 85, 97, 132}, 3, 7, 43, 3},
+	}
+
+	for _, element := range tests {
+		v := FindLastSortedIndex(element.values, element.start, element.end, element.key)
+		if v != element.result {
+			t.Error(
+				"For", element.values, "find", element.key,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}

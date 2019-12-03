@@ -554,3 +554,38 @@ func BinarySearchBitonic(data []int, start int, end int, key int, isInc bool) in
 	return BinarySearchBitonic(data, mid+1, end, key, isInc)
 
 }
+
+// FindFirstSortedIndex - recursivly finds first index of the key in the sorted range of data
+func FindFirstSortedIndex(data []int, start int, end int, key int) int {
+	// sort.Ints(data) // Sort(data,size)
+	// fmt.Println(start, end)
+	if end < start {
+		return -1
+	}
+	mid := (start + end) / 2
+	// fmt.Println(key, data[mid], mid)
+	if key == data[mid] && (mid == start || data[mid-1] != key) {
+		return mid
+	}
+
+	if key <= data[mid] {
+		return FindFirstSortedIndex(data, start, mid-1, key)
+	}
+	return FindFirstSortedIndex(data, mid+1, end, key)
+}
+
+// FindLastSortedIndex - recursivly finds last index of the key in the sorted range of data
+func FindLastSortedIndex(data []int, start int, end int, key int) int {
+	if end < start {
+		return -1
+	}
+	mid := (start + end) / 2
+	if key == data[mid] && (mid == end || data[mid+1] != key) {
+		return mid
+	}
+
+	if key < data[mid] {
+		return FindLastSortedIndex(data, start, mid-1, key)
+	}
+	return FindLastSortedIndex(data, mid+1, end, key)
+}
