@@ -452,7 +452,105 @@ func FindMinAbsSumPairSorting(data []int) (value1, value2 int) {
 			break
 		}
 	}
-	fmt.Println(" The two elements with minimum sum are : ", data[minFirst], " , ",
-		data[minSecond])
+	// fmt.Println(" The two elements with minimum sum are : ", data[minFirst], " , ", 		data[minSecond])
 	return data[minFirst], data[minSecond]
+}
+
+// SearchBitonicArrayMax finds maxima in a bitonic list
+// A bitonic list comprises of an increasing sequence of integers immediately followed by a decreasing sequence of integers.
+func SearchBitonicArrayMax(data []int) (int, bool) {
+	size := len(data)
+	start := 0
+	end := size - 1
+	mid := (start + end) / 2
+	maximaFound := 0
+	if size < 3 {
+		// fmt.Println("InvalidInput")
+		return 0, false
+	}
+
+	for start <= end {
+		mid = (start + end) / 2
+
+		// fmt.Println(start, end, mid)
+
+		if mid == 0 { // start of the list
+			if data[mid] < data[mid+1] {
+				maximaFound = 1
+				mid = mid + 1
+				break
+			} else {
+				maximaFound = 1
+				break
+			}
+		}
+		if mid == size-1 { // end of the list
+			if data[mid] < data[mid-1] {
+				maximaFound = 1
+				break
+			} else {
+				maximaFound = 1
+				break
+			}
+		}
+
+		if data[mid-1] < data[mid] && data[mid+1] < data[mid] { //maxima
+			maximaFound = 1
+			break
+		} else if data[mid-1] < data[mid] && data[mid] < data[mid+1] { // increasing
+			start = mid + 1
+		} else if data[mid-1] > data[mid] && data[mid] > data[mid+1] { // decreasing
+			end = mid - 1
+		} else if data[mid-1] > data[mid] && data[mid] < data[mid+1] { // local minimum
+			maximaFound = 1
+			if data[0] > data[size-1] {
+				mid = 0
+				break
+			} else {
+				mid = size - 1
+				break
+			}
+		} else {
+			break
+		}
+	}
+
+	if maximaFound == 0 {
+		// fmt.Println("NoMaximaFound")
+		return 0, false
+	}
+	return mid, true
+}
+
+// SearchBitonicArray searches for an item in bitonic list
+// Search element in a bitonic list
+func SearchBitonicArray(data []int, key int) int {
+	size := len(data)
+	maxIndex, _ := SearchBitonicArrayMax(data)
+	k := BinarySearchBitonic(data, 0, maxIndex, key, true)
+	if k != -1 {
+		return k
+	}
+	return BinarySearchBitonic(data, maxIndex+1, size-1, key, false)
+}
+
+// BinarySearchBitonic - modifyed recursive binary search algorithm (BinarySearch in list.go)
+func BinarySearchBitonic(data []int, start int, end int, key int, isInc bool) int {
+	// fmt.Println(start, end)
+	if end < start {
+		// fmt.Println("end < start")
+		if key == data[0] {
+			return 0
+		}
+		return -1
+	}
+	mid := (start + end) / 2
+	if key == data[mid] {
+		return mid
+	}
+	if isInc != false && key < data[mid] || isInc == false && key > data[mid] {
+		return BinarySearchBitonic(data, start, mid-1, key, isInc)
+	}
+	return BinarySearchBitonic(data, mid+1, end, key, isInc)
+
 }

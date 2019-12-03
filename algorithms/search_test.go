@@ -613,3 +613,79 @@ func TestFindMinAbsSumPairSorting(t *testing.T) {
 		}
 	}
 }
+func TestSearchBitonicArrayMax(t *testing.T) {
+
+	type testelements struct {
+		values     []int
+		resultInt  int
+		resultBool bool
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, false},
+		{[]int{3, 5, 10, 4, 1}, 2, true},
+		{[]int{-3, -1, 2, 4, 6, 12}, 5, true},
+		{[]int{13, 12, 10, 4, 1, -2, -4}, 0, true},
+		{[]int{10, 14, 5, 1, 0}, 1, true},
+		{[]int{1, 2, 3, 0, -1}, 2, true},
+		{[]int{1, 2, 3, 5, 6, 10, 11, 4, 2, -1}, 6, true},
+		{[]int{1, 2, 3, 4, 6, 7}, 5, true},
+		{[]int{3, 2, 1, 4, 5, 7, 9}, 6, true},
+		{[]int{223, 22, 11, 224, 225}, 4, true},
+		{[]int{1, 3}, 0, false},
+		{[]int{1, 4, 3}, 1, true},
+		{[]int{1, 2, 4}, 2, true},
+	}
+
+	for _, element := range tests {
+		v, ok := SearchBitonicArrayMax(element.values)
+		if v != element.resultInt || ok != element.resultBool {
+			t.Error(
+				"For", element.values,
+				"expected", element.resultInt, element.resultBool,
+				"got", v, ok,
+			)
+		}
+	}
+}
+
+func TestSearchBitonicArray(t *testing.T) {
+
+	type testelements struct {
+		values []int
+		key    int
+		result int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, -1},
+		{[]int{3, 5, 10, 4, 1}, 2, -1},
+		{[]int{-3, -1, 2, 4, 6, 12}, 5, -1},
+		{[]int{-3, -1, 2, 4, 6, 12}, 12, 5},
+		{[]int{-3, -1, 2, 4, 6, 12}, -3, 0},
+		{[]int{13, 12, 10, 4, 1, -2, -4}, 10, 2},
+		{[]int{10, 14, 5, 1, 0}, 1, 3},
+		{[]int{1, 2, 3, 0, -1}, 2, 1},
+		{[]int{1, 2, 3, 5, 6, 10, 11, 4, 2, -1}, 6, 4},
+		{[]int{1, 2, 3, 4, 6, 7}, 5, -1},
+		{[]int{3, 2, 1, 4, 5, 7, 9}, 6, -1},
+		{[]int{223, 22, 11, 224, 225}, 4, -1},
+		{[]int{223, 22, 11, 224, 225}, 223, 0},
+		{[]int{4, 3, 2, 1, 2, 3, 4, 5}, 4, 6},
+		{[]int{223, 22, 11, 224, 225}, 225, 4},
+		{[]int{1, 3}, 0, -1},
+		{[]int{1, 4, 3}, 1, 0},
+		{[]int{1, 2, 4}, 2, 1},
+	}
+
+	for _, element := range tests {
+		v := SearchBitonicArray(element.values, element.key)
+		if v != element.result {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
