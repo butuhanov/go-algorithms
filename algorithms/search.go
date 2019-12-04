@@ -651,3 +651,9 @@ func FindMaxProfit(stocks []int) (int, int, int) {
 	return buy, sell, maxProfit
 
 }
+// FindMedian get median using sorting approach
+func FindMedian(data []int) int {
+size := len(data)
+sort.Ints(data)
+return data[size/2]
+}
