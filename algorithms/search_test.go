@@ -888,6 +888,10 @@ func TestFindMedian(t *testing.T) {
 		{[]int{1, 0, 0}, 0},
 		{[]int{-400, -321, 1, 110, 145, 234, 300, 780}, 145},
 		{[]int{-400, -321, 1, 700, -110, 145, -234, -321, 780, 700}, 1},
+		{[]int{11, 9, 3, 5, 5}, 5},
+		{[]int{1, 3, 5, 7}, 5},
+		{[]int{3, 5}, 5},
+		{[]int{1, 3, 3, 6, 7, 8, 9}, 6},
 	}
 
 	for _, element := range tests {
@@ -895,6 +899,32 @@ func TestFindMedian(t *testing.T) {
 		if v != element.result {
 			t.Error(
 				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+
+func TestFindMedianTwoLists(t *testing.T) {
+
+	type testelements struct {
+		values1 []int
+		values2 []int
+		result  int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, []int{1, 2}, 1},
+		{[]int{1, 2, 4, 5, 2, 5, 4, 8, 9, 3, 4}, []int{1, 2, 3, 4, 5}, 4},
+		{[]int{1, 2, 3, 4, 5, 6, 7, 8, 9}, []int{1, 1, 1, 1, 3}, 3},
+	}
+
+	for _, element := range tests {
+		v := FindMedianTwoLists(element.values1, element.values2)
+		if v != element.result {
+			t.Error(
+				"For", element.values1, element.values2,
 				"expected", element.result,
 				"got", v,
 			)

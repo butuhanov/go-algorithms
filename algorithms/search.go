@@ -622,6 +622,7 @@ func SeperateEvenAndOdd(data []int) []int {
 	}
 	return data
 }
+
 // FindMaxProfit is a solution to the Stock purchase-sell problem
 // Bruteforce approach have The Time Complexity is O(n2) and Space Complexity is O(1)
 // Second approach is to keep track of the smallest value seen so far from the start. At each point, we can find the difference and keep track of the maximum profit. This is a linear solution.
@@ -651,9 +652,36 @@ func FindMaxProfit(stocks []int) (int, int, int) {
 	return buy, sell, maxProfit
 
 }
+
 // FindMedian get median using sorting approach
+// See also  https://en.wikipedia.org/wiki/Median
 func FindMedian(data []int) int {
-size := len(data)
-sort.Ints(data)
-return data[size/2]
+	size := len(data)
+	sort.Ints(data)
+	return data[size/2]
+}
+
+// FindMedianTwoLists - finds median of two lists
+func FindMedianTwoLists(dataFirst []int, dataSecond []int) int {
+	sizeFirst := len(dataFirst)
+	sizeSecond := len(dataSecond)
+	sort.Ints(dataFirst)
+	sort.Ints(dataSecond)
+	// cealing function.
+	medianIndex := ((sizeFirst + sizeSecond) + (sizeFirst+sizeSecond)%2) / 2
+	i := 0
+	j := 0
+	count := 0
+	for count < medianIndex-1 {
+		if i < sizeFirst-1 && dataFirst[i] < dataSecond[j] {
+			i++
+		} else {
+			j++
+		}
+		count++
+	}
+	if dataFirst[i] < dataSecond[j] {
+		return dataFirst[i]
+	}
+	return dataSecond[j]
 }
