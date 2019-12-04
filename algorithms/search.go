@@ -685,3 +685,21 @@ func FindMedianTwoLists(dataFirst []int, dataSecond []int) int {
 	}
 	return dataSecond[j]
 }
+
+// FindElementIn2DArray searches for given item in 2D-array (two dimenional list)
+func FindElementInSorted2DArray(data [][]int, r int, c int, value int) bool {
+	//  Start with element at last column and first row
+	row := 0
+	column := c - 1
+	for row < r && column >= 0 {
+		if data[row][column] == value { //  the element is the value we are looking for.
+			return true
+		} else if data[row][column] > value { //  element is greater than the value we are looking for, go to the element at previous column but same row.
+			column--
+		} else { // element is less than the value we are looking for, go to the element at next row but same column.
+			row++
+		}
+	}
+	return false //  the element is not found after reaching the element of the last row  Return false, if the element is not found after reaching the element ofof the first column. Condition (row < r && column >= 0) is false.
+
+}

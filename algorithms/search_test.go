@@ -931,3 +931,35 @@ func TestFindMedianTwoLists(t *testing.T) {
 		}
 	}
 }
+
+func TestFindElementInSorted2DArray(t *testing.T) {
+
+	type testelements struct {
+		data   [][]int
+		r      int
+		c      int
+		value  int
+		result bool
+	}
+
+	var tests = []testelements{
+		{[][]int{{1, 2}, {1, 2}}, 1, 1, 1, true},
+		{[][]int{{1, 2, 4, 6, 7, 9, 14, 16}, {1, 2, 6, 7, 26, 27, 31}}, 1, 8, 2, true},
+		{[][]int{{1, 2, 4, 61, 67, 72, 74, 86}, {1, 2, 6, 7, 26, 67, 71, 81}}, 1, 8, 67, true},
+		{[][]int{{1, 2, 4, 61, 67, 72, 74, 86}, {1, 2, 6, 7, 26}}, 1, 8, 86, true},
+		{[][]int{{1, 2, 4, 61, 67, 72, 74, 86}, {1, 2, 6, 7, 26}}, 1, 8, 26, false},
+		{[][]int{{1, 2, 4, 61, 67, 72, 74, 86}, {1, 2, 6, 7, 26, 34, 55, 64}}, 0, 9, 26, false},
+		{[][]int{{1, 2, 3, 4}, {1, 2}}, 1, 3, 3, true},
+	}
+
+	for _, element := range tests {
+		v := FindElementInSorted2DArray(element.data, element.r, element.c, element.value)
+		if v != element.result {
+			t.Error(
+				"For", element.data, element.r, element.c, element.value,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
