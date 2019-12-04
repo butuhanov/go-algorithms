@@ -30,6 +30,20 @@ func BubbleSortModified(arr []int, comp func(int, int) bool) []int {
 	return arr
 }
 
+// InsertionSort - implements insertion sort algorithm
+func InsertionSort(arr []int, comp func(int, int) bool) []int {
+	size := len(arr)
+	var temp, i, j int
+	for i = 1; i < size; i++ {
+		temp = arr[i]
+		for j = i; j > 0 && comp(arr[j-1], temp); j-- {
+			arr[j] = arr[j-1]
+		}
+		arr[j] = temp
+	}
+	return arr
+}
+
 // resulting output will be in descending order.
 func less(value1 int, value2 int) bool {
 	return value1 < value2
