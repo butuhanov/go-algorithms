@@ -44,6 +44,72 @@ func InsertionSort(arr []int, comp func(int, int) bool) []int {
 	return arr
 }
 
+// SelectionSort - implements selection sort algorithm
+// func SelectionSort(arr []int) []int {
+// 	size := len(arr)
+// 	var i, j, max int
+// 	for i = 0; i < size-1; i++ {
+// 		max = 0
+// 		for j = 1; j < size-1-i; j++ {
+// 			if arr[j] > arr[max] {
+// 				max = j
+// 			}
+// 		}
+// 		arr[size-1-i], arr[max] = arr[max], arr[size-1-i]
+// 	}
+// 	return arr
+// }
+
+// MergeSort -	Merge sort divide the input into half recursive in each step. It sort the two parts separately recursively and finally combine the result into final sorted output.
+func MergeSort(arr []int, comp func(int, int) bool) []int {
+	size := len(arr)
+	tempArray := make([]int, size)
+	mergeSrt(arr, tempArray, 0, size-1, comp)
+	return arr
+}
+
+func merge(arr []int, tempArray []int, lowerIndex int, middleIndex int, upperIndex int, comp func(int, int) bool) {
+	lowerStart := lowerIndex
+	lowerStop := middleIndex
+	upperStart := middleIndex + 1
+	upperStop := upperIndex
+	count := lowerIndex
+	for lowerStart <= lowerStop && upperStart <= upperStop {
+		if comp(arr[lowerStart], arr[upperStart]) == false {
+			tempArray[count] = arr[lowerStart]
+			lowerStart++
+		} else {
+			tempArray[count] = arr[upperStart]
+			upperStart++
+		}
+
+		count++
+	}
+	for lowerStart <= lowerStop {
+		tempArray[count] = arr[lowerStart]
+		count++
+		lowerStart++
+	}
+	for upperStart <= upperStop {
+		tempArray[count] = arr[upperStart]
+		count++
+		upperStart++
+	}
+	for i := lowerIndex; i <= upperIndex; i++ {
+		arr[i] = tempArray[i]
+	}
+}
+
+func mergeSrt(arr []int, tempArray []int, lowerIndex int, upperIndex int, comp func(int, int) bool) {
+	if lowerIndex >= upperIndex {
+		return
+	}
+	middleIndex := (lowerIndex + upperIndex) / 2
+	mergeSrt(arr, tempArray, lowerIndex, middleIndex, comp)
+	mergeSrt(arr, tempArray, middleIndex+1, upperIndex, comp)
+	merge(arr, tempArray, lowerIndex, middleIndex, upperIndex, comp)
+}
+
 // resulting output will be in descending order.
 func less(value1 int, value2 int) bool {
 	return value1 < value2
