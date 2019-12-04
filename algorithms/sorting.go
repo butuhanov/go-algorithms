@@ -68,6 +68,41 @@ func MergeSort(arr []int, comp func(int, int) bool) []int {
 	return arr
 }
 
+// QuickSort - implements QuickSort algorithm
+func QuickSort(arr []int, comp func(int, int) bool) []int {
+	size := len(arr)
+	quickSortUtil(arr, 0, size-1, comp)
+	return arr
+}
+
+func quickSortUtil(arr []int, lower int, upper int, comp func(int, int) bool) {
+	if upper <= lower {
+		return
+	}
+	pivot := arr[lower]
+	start := lower
+	stop := upper
+	for lower < upper {
+		for comp(arr[lower], pivot) == false && lower < upper {
+			lower++
+		}
+		for comp(arr[upper], pivot) && lower <= upper {
+			upper--
+		}
+		if lower < upper {
+			swapArray(arr, upper, lower)
+		}
+	}
+	swapArray(arr, upper, start)
+	// upper is the pivot position
+	quickSortUtil(arr, start, upper-1, comp) // pivot -1 is the upper for left sub array.
+	quickSortUtil(arr, upper+1, stop, comp)  // pivot + 1 is the lower for right sub array.
+}
+
+func swapArray(arr []int, first int, second int) {
+	arr[first], arr[second] = arr[second], arr[first]
+}
+
 func merge(arr []int, tempArray []int, lowerIndex int, middleIndex int, upperIndex int, comp func(int, int) bool) {
 	lowerStart := lowerIndex
 	lowerStop := middleIndex
