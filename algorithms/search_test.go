@@ -826,3 +826,37 @@ func TestSeperateEvenAndOdd(t *testing.T) {
 		}
 	}
 }
+
+func TestFindMaxProfit(t *testing.T) {
+
+	type testelements struct {
+		stocks []int
+		buy    int
+		ack    int
+		profit int
+	}
+
+	var tests = []testelements{
+		{[]int{1, 2}, 0, 1, 1},
+		{[]int{3, 1, 2, 6, -4, 7, 5}, 4, 5, 11},
+		{[]int{6, 4, -5, -2, 1, 7}, 2, 5, 12},
+		{[]int{1, 2, -3, 5, 6}, 2, 4, 9},
+		{[]int{1, 2, 3, 4, 6, 7}, 0, 5, 6},
+		{[]int{3, 2, 1, 4, 5, 7, 9, 6, 10, 11}, 2, 9, 10},
+		{[]int{223, 22, 112, 224, 225, 72, 92, 26, 102, 121}, 1, 4, 203},
+		{[]int{1, 3}, 0, 1, 2},
+		{[]int{1, 4, 3}, 0, 1, 3},
+		{[]int{1, 2, 4}, 0, 2, 3},
+	}
+
+	for _, element := range tests {
+		res1, res2, res3 := FindMaxProfit(element.stocks)
+		if res1 != element.buy || res2 != element.ack || res3 != element.profit {
+			t.Error(
+				"For", element.stocks,
+				"expected", element.buy, element.ack, element.profit,
+				"got", res1, res2, res3,
+			)
+		}
+	}
+}

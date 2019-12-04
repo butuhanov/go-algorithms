@@ -622,3 +622,32 @@ func SeperateEvenAndOdd(data []int) []int {
 	}
 	return data
 }
+// FindMaxProfit is a solution to the Stock purchase-sell problem
+// Bruteforce approach have The Time Complexity is O(n2) and Space Complexity is O(1)
+// Second approach is to keep track of the smallest value seen so far from the start. At each point, we can find the difference and keep track of the maximum profit. This is a linear solution.
+// The Time Complexity of the algorithm is O(n) time. Space Complexity for creating count list is also O(1)
+func FindMaxProfit(stocks []int) (int, int, int) {
+	size := len(stocks)
+	buy := 0
+	sell := 0
+	curMin := 0
+	currProfit := 0
+	maxProfit := 0
+	for i := 0; i < size; i++ {
+		if stocks[i] < stocks[curMin] {
+			curMin = i
+		}
+		currProfit = stocks[i] - stocks[curMin]
+		if currProfit > maxProfit {
+			buy = curMin
+			sell = i
+			maxProfit = currProfit
+		}
+	}
+	// fmt.Println("Purchase day is- ", buy, " at price ", stocks[buy])
+	// fmt.Println("Sell day is- ", sell, " at price ", stocks[sell])
+	// fmt.Println("Max Profit :: ", maxProfit)
+
+	return buy, sell, maxProfit
+
+}
