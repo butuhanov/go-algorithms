@@ -55,3 +55,27 @@ func TestTransformStringAB1(t *testing.T) {
 	}
 
 }
+
+func TestRobinKarp(t *testing.T) {
+	cases := []struct {
+		text    string
+		pattern string
+		result  int
+	}{
+		{"hello, World!", "ll", 2},
+		{"hello, World!", "!", 12},
+		{"hello, World!", " ", 6},
+		{"hello, World!", ",", 5},
+	}
+	for _, element := range cases {
+		v := RobinKarp(element.text, element.pattern)
+		if v != element.result {
+			t.Error(
+				"For", element.text, "find", element.pattern,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+
+}
