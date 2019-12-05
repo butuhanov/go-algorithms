@@ -68,11 +68,44 @@ func MergeSort(arr []int, comp func(int, int) bool) []int {
 	return arr
 }
 
-// QuickSort - implements QuickSort algorithm
+// QuickSort - implements Quick Sort algorithm
 func QuickSort(arr []int, comp func(int, int) bool) []int {
 	size := len(arr)
 	quickSortUtil(arr, 0, size-1, comp)
 	return arr
+}
+
+// QuickSelect - implements Quick Select algorithm
+// Quick select algorithm is used to find the element, which will be at the Kth position when the list will be sorted without actually sorting the whole list.
+func QuickSelect(arr []int, key int) int {
+	size := len(arr)
+	quickSelectUtil(arr, 0, size-1, key)
+	return arr[key-1]
+}
+
+func quickSelectUtil(arr []int, lower int, upper int, key int) {
+	if upper <= lower {
+		return
+	}
+	pivot := arr[lower]
+	start := lower
+	stop := upper
+	for lower < upper {
+		for arr[lower] <= pivot && lower < upper {
+			lower++
+		}
+		for arr[upper] > pivot && lower <= upper {
+			upper--
+		}
+		if lower < upper {
+			swapArray(arr, upper, lower)
+		}
+	}
+
+	swapArray(arr, upper, start)
+	// upper is the pivot position
+	quickSelectUtil(arr, start, upper-1, key) // pivot -1 is the upper for left sub array.
+	quickSelectUtil(arr, upper+1, stop, key)  // pivot + 1 is the lower for right sub array.
 }
 
 func quickSortUtil(arr []int, lower int, upper int, comp func(int, int) bool) {
