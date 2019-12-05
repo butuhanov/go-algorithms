@@ -223,3 +223,32 @@ func TestQuickSelect(t *testing.T) {
 		}
 	}
 }
+
+func TestBucketSort(t *testing.T) {
+
+	type testelements struct {
+		values     []int
+		lowerRange int
+		upperRange int
+		result     []int
+	}
+
+	var tests = []testelements{
+		{[]int{9, 1, 8, 2, 7, 3, 6, 4, 5}, 1, 10, []int{1, 2, 3, 4, 5, 6, 7, 8, 9}},
+		{[]int{9, 1, 8, 2, -7, 3, 6, -4, 5}, -10, 10, []int{-7, -4, 1, 2, 3, 5, 6, 8, 9}},
+		{[]int{1, 1, 8, 2, -7, 1, 6, -4, 5}, -10, 10, []int{-7, -4, 1, 1, 1, 2, 5, 6, 8}},
+		{[]int{9, -1, 8, 0, 7, 3, -6, 4, 3}, -10, 10, []int{-6, -1, 0, 3, 3, 4, 7, 8, 9}},
+		{[]int{91, -133, 81, 0, 711, 31, -61, 433, 31}, -200, 1500, []int{-133, -61, 0, 31, 31, 81, 91, 433, 711}},
+	}
+
+	for _, element := range tests {
+		v := BucketSort(element.values, element.lowerRange, element.upperRange)
+		if !reflect.DeepEqual(v, element.result) {
+			t.Error(
+				"For", element.values,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}

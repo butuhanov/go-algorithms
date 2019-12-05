@@ -83,6 +83,27 @@ func QuickSelect(arr []int, key int) int {
 	return arr[key-1]
 }
 
+// BucketSort - implements Bucket Sort algorithm
+func BucketSort(data []int, lowerRange int, upperRange int) []int {
+	rng := upperRange - lowerRange
+	size := len(data)
+	count := make([]int, rng)
+	for i := 0; i < rng; i++ {
+		count[i] = 0
+	}
+	for i := 0; i < size; i++ {
+		count[data[i]-lowerRange]++
+	}
+	j := 0
+	for i := 0; i < rng; i++ {
+		for ; count[i] > 0; count[i]-- {
+			data[j] = i + lowerRange
+			j++
+		}
+	}
+	return data
+}
+
 func quickSelectUtil(arr []int, lower int, upper int, key int) {
 	if upper <= lower {
 		return
