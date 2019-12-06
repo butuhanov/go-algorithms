@@ -91,6 +91,28 @@ func KMP(text string, pattern string) int {
 	return -1
 }
 
+// KMPFindCount finds  the number of occurrences of the pattern in the text using Knuth-Morris-Pratt algorithm
+func KMPFindCount(text string, pattern string) int {
+	i, j := 0, 0
+	count := 0
+	n := len(text)
+	m := len(pattern)
+	ShiftArr := make([]int, m+1)
+	kmpPreprocess(pattern, ShiftArr)
+	for i < n {
+		for j >= 0 && text[i] != pattern[j] {
+			j = ShiftArr[j]
+		}
+		i++
+		j++
+		if j == m {
+			count++
+			j = ShiftArr[j]
+		}
+	}
+	return count
+}
+
 func kmpPreprocess(pattern string, ShiftArr []int) {
 	m := len(pattern)
 	i := 0

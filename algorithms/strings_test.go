@@ -105,3 +105,30 @@ func TestKMP(t *testing.T) {
 	}
 
 }
+
+func TestKMPFindCount(t *testing.T) {
+	cases := []struct {
+		text    string
+		pattern string
+		result  int
+	}{
+		{"hello, World!", "ll", 1},
+		{"hello, World!", "l", 3},
+		{"hello, World!", "!", 1},
+		{"heLLo, World!", "L", 2},
+		{"hello, World!", ",", 1},
+		{"hello, World!", "?", 0},
+		{" hello,  World! ", " ", 4},
+	}
+	for _, element := range cases {
+		v := KMPFindCount(element.text, element.pattern)
+		if v != element.result {
+			t.Error(
+				"For", element.text, "find", element.pattern,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+
+}
