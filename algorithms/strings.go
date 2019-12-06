@@ -69,3 +69,39 @@ func RobinKarp(text string, pattern string) int {
 	}
 	return -1
 }
+
+// KMP implements Knuth-Morris-Pratt algorithm
+// English words only
+func KMP(text string, pattern string) int {
+	i, j := 0, 0
+	n := len(text)
+	m := len(pattern)
+	ShiftArr := make([]int, m+1)
+	kmpPreprocess(pattern, ShiftArr)
+	for i < n {
+		for j >= 0 && text[i] != pattern[j] {
+			j = ShiftArr[j]
+		}
+		i++
+		j++
+		if j == m {
+			return (i - m)
+		}
+	}
+	return -1
+}
+
+func kmpPreprocess(pattern string, ShiftArr []int) {
+	m := len(pattern)
+	i := 0
+	j := -1
+	ShiftArr[i] = -1
+	for i < m {
+		for j >= 0 && pattern[i] != pattern[j] {
+			j = ShiftArr[j]
+		}
+		i++
+		j++
+		ShiftArr[i] = j
+	}
+}
