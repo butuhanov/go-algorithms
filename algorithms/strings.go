@@ -236,6 +236,51 @@ func printAnagramUtil(a []rune, max int, n int) []string {
 	return nil
 }
 
+// ReverseString reverses all the characters of a string
+func ReverseString(a string) string {
+	chars := []rune(a)
+	reverseStringUtil(chars)
+	return string(chars)
+}
+
+//ReverseStringRange reverses order of words in a string sentence.
+func ReverseStringRange(a []rune, lower int, upper int) {
+	for lower < upper {
+		a[lower], a[upper] = a[upper], a[lower]
+		lower++
+		upper--
+	}
+}
+
+// ReverseWords of a sentence
+// english words only
+func ReverseWords(str string) string {
+	length := len(str)
+	upper := -1
+	lower := 0
+	arr := []rune(str)
+	for i := 0; i < length; i++ {
+		if arr[i] == ' ' {
+			ReverseStringRange(arr, lower, upper)
+			lower = i + 1
+			upper = i
+		} else {
+			upper++
+		}
+	}
+	ReverseStringRange(arr, lower, upper)
+	ReverseStringRange(arr, 0, length-1)
+	return string(arr)
+}
+func reverseStringUtil(a []rune) {
+	lower := 0
+	upper := len(a) - 1
+	for lower < upper {
+		a[lower], a[upper] = a[upper], a[lower]
+		lower++
+		upper--
+	}
+}
 func kmpPreprocess(pattern string, ShiftArr []int) {
 	m := len(pattern)
 	i := 0

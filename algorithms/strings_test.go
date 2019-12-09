@@ -284,3 +284,47 @@ func TestCheckPalindrome(t *testing.T) {
 // 		}
 // 	}
 // }
+
+func TestReverseString(t *testing.T) {
+	cases := []struct {
+		text   string
+		result string
+	}{
+		{"hello", "olleh"},
+		{"hello, World", "dlroW ,olleh"},
+		{"test", "tset"},
+		{"тест", "тсет"},
+		{"фы♥♥♥ва", "ав♥♥♥ыф"},
+		{"ф♥♥ы♥ва", "ав♥ы♥♥ф"},
+	}
+	for _, element := range cases {
+		v := ReverseString(element.text)
+		if v != element.result {
+			t.Error(
+				"For", element.text,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
+func TestReverseWords(t *testing.T) {
+	cases := []struct {
+		text   string
+		result string
+	}{
+		{"hello", "hello"},
+		{"hello, World", "World hello,"},
+		// {"проверка тест", "тест проверка"},
+	}
+	for _, element := range cases {
+		v := ReverseWords(element.text)
+		if v != element.result {
+			t.Error(
+				"For", element.text,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
