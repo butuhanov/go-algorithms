@@ -141,6 +141,23 @@ func (t *StringTree) FindBSTree(value string) bool {
 	return ret
 }
 
+// OrderMatching finds if the characters of pattern string are in the same order in text string.
+func OrderMatching(source string, pattern string) int {
+	iSource := 0
+	iPattern := 0
+	sourceLen := len(source)
+	patternLen := len(pattern)
+	for iSource = 0; iSource < sourceLen; iSource++ {
+		if source[iSource] == pattern[iPattern] {
+			iPattern++
+		}
+		if iPattern == patternLen {
+			return 1
+		}
+	}
+	return 0
+}
+
 func kmpPreprocess(pattern string, ShiftArr []int) {
 	m := len(pattern)
 	i := 0

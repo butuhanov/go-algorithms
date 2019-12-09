@@ -139,9 +139,15 @@ func TestStringTree(t *testing.T) {
 		pattern string
 		result  bool
 	}{
-		{"Test 1", "ll", false},
+		{"Test 1", "Aynsh", true},
 		{"Test 3", "3", false},
 		{"Test 4", "Test 4", true},
+		{"Parth", "Test 4", true},
+		{"Aynsh", "Test 4", true},
+		{"Rayan", "Test 4", true},
+		{"Aditya", "Test 4", true},
+		{"Pranav", "Test 4", true},
+		{"Samar", "Test 4", true},
 	}
 	tt := new(StringTree)
 	for _, element := range cases {
@@ -157,4 +163,31 @@ func TestStringTree(t *testing.T) {
 			)
 		}
 	}
+}
+
+func TestOrderMatching(t *testing.T) {
+	cases := []struct {
+		text    string
+		pattern string
+		result  int
+	}{
+		{"hello, World!", "ll", 1},
+		{"hello, World!", "lord", 1},
+		{"hello, World!", "leh", 0},
+		{"heLLo, World!", "Ll!", 1},
+		{"hello, World!", "W,", 0},
+		{"hello, World!", "?", 0},
+		{" hello,  World! ", " !", 1},
+	}
+	for _, element := range cases {
+		v := OrderMatching(element.text, element.pattern)
+		if v != element.result {
+			t.Error(
+				"For", element.text, "find", element.pattern,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+
 }
