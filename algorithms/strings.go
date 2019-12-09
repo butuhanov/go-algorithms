@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -209,6 +210,30 @@ func CheckPalindrome(str string) bool {
 		return false
 	}
 	return true
+}
+
+// Anagram finds all the anagram of the string.
+// see https://en.wikipedia.org/wiki/Anagram
+func Anagram(a string) []string {
+	n := len(a)
+	return printAnagramUtil([]rune(a), n, n)
+}
+
+func printAnagramUtil(a []rune, max int, n int) []string {
+	if max == 1 {
+		fmt.Println(string(a))
+		// return string(a)
+	}
+	for i := -1; i < max-1; i++ {
+		if i != -1 {
+			a[i], a[max-1] = a[max-1], a[i]
+		}
+		printAnagramUtil(a, max-1, n)
+		if i != -1 {
+			a[i], a[max-1] = a[max-1], a[i]
+		}
+	}
+	return nil
 }
 
 func kmpPreprocess(pattern string, ShiftArr []int) {

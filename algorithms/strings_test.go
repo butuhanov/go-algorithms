@@ -1,6 +1,8 @@
 package algorithms
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestChangeStringElement(t *testing.T) {
 	cases := []struct {
@@ -262,3 +264,23 @@ func TestCheckPalindrome(t *testing.T) {
 		}
 	}
 }
+
+// func TestAnagram(t *testing.T) {
+// 	cases := []struct {
+// 		str    string
+// 		result []string
+// 	}{
+// 		{"Abc", []string{}},
+// 	}
+
+// 	for _, element := range cases {
+// 		v := Anagram(element.str)
+// 		if !reflect.DeepEqual(v, element.result) {
+// 			t.Error(
+// 				"For", element.str,
+// 				"expected", element.result,
+// 				"got", v,
+// 			)
+// 		}
+// 	}
+// }
