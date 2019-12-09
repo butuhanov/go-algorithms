@@ -191,3 +191,26 @@ func TestOrderMatching(t *testing.T) {
 	}
 
 }
+
+func TestCheckUniqueChar(t *testing.T) {
+	cases := []struct {
+		text   string
+		result bool
+	}{
+		{"ghjdthrf", false},
+		{"ghjdtrf", true},
+		{"test", false},
+		{"tes", true},
+	}
+	for _, element := range cases {
+		v := CheckUniqueChar(element.text)
+		if v != element.result {
+			t.Error(
+				"For", element.text, "find", v,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+
+}
