@@ -196,6 +196,21 @@ func CheckPermutation(s1 string, s2 string) bool {
 	return true
 }
 
+// CheckPalindrome finds if the string is a palindrome
+// see https://en.wikipedia.org/wiki/Palindrome
+func CheckPalindrome(str string) bool {
+	i := 0
+	j := len(str) - 1
+	for i < j && str[i] == str[j] {
+		i++
+		j--
+	}
+	if i < j {
+		return false
+	}
+	return true
+}
+
 func kmpPreprocess(pattern string, ShiftArr []int) {
 	m := len(pattern)
 	i := 0

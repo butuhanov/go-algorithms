@@ -225,7 +225,7 @@ func TestCheckPermutation(t *testing.T) {
 		{"test", "estt", true},
 		{"test", "stte", true},
 		{"test", "tets", true},
-		{"test", "ttee", true},
+		{"test", "ttee", false},
 	}
 	for _, element := range cases {
 		v := CheckPermutation(element.string1, element.string2)
@@ -237,5 +237,28 @@ func TestCheckPermutation(t *testing.T) {
 			)
 		}
 	}
-
+}
+func TestCheckPalindrome(t *testing.T) {
+	cases := []struct {
+		str    string
+		result bool
+	}{
+		{"test", false},
+		{"tset", false},
+		{"Sator Arepo Tenet Opera Rotas", false},
+		{"sator arepo tenet opera rotas", true},
+		{"madam im adam", false},
+		{"313", true},
+		{"tattarrattat", true},
+	}
+	for _, element := range cases {
+		v := CheckPalindrome(element.str)
+		if v != element.result {
+			t.Error(
+				"For", element.str, "find", v,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
 }
