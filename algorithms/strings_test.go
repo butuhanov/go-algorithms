@@ -214,3 +214,28 @@ func TestCheckUniqueChar(t *testing.T) {
 	}
 
 }
+
+func TestCheckPermutation(t *testing.T) {
+	cases := []struct {
+		string1 string
+		string2 string
+		result  bool
+	}{
+		{"test", "test", true},
+		{"test", "estt", true},
+		{"test", "stte", true},
+		{"test", "tets", true},
+		{"test", "ttee", true},
+	}
+	for _, element := range cases {
+		v := CheckPermutation(element.string1, element.string2)
+		if v != element.result {
+			t.Error(
+				"For", element.string1, element.string2, "find", v,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+
+}

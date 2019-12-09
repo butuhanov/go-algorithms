@@ -173,6 +173,29 @@ func CheckUniqueChar(str string) bool {
 	return true
 }
 
+// CheckPermutation checks if one string is a permutation of the second
+func CheckPermutation(s1 string, s2 string) bool {
+	count := make(map[byte]int)
+	length := len(s1)
+	if len(s2) != length {
+		return false
+	}
+
+	for i := 0; i < length; i++ {
+		ch := s1[i]
+		count[ch]++
+		ch = s2[i]
+		count[ch]--
+	}
+	for i := 0; i < length; i++ {
+		ch := s1[i]
+		if count[ch] != 0 {
+			return false
+		}
+	}
+	return true
+}
+
 func kmpPreprocess(pattern string, ShiftArr []int) {
 	m := len(pattern)
 	i := 0
