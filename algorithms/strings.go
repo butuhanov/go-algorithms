@@ -1,5 +1,9 @@
 package algorithms
 
+import (
+	"strings"
+)
+
 // ChangeStringElement change the character by its position in the stirng
 func ChangeStringElement(in string, position int, symbol rune) string {
 	r := []rune(in)
@@ -113,6 +117,30 @@ func KMPFindCount(text string, pattern string) int {
 	return count
 }
 
+// Node is struct for a tree
+type Node struct {
+	value  string
+	count  int
+	lChild *Node
+	rChild *Node
+}
+
+// StringTree is implementation of binary search tree to store string as key.
+type StringTree struct {
+	root *Node
+}
+
+// InsertBSTree inserts an item into a tree
+func (t *StringTree) InsertBSTree(value string) {
+	t.root = t.insertUtil(value, t.root)
+}
+
+// FindBSTree looking for value in a tree
+func (t *StringTree) FindBSTree(value string) bool {
+	ret := t.findUtil(t.root, value)
+	return ret
+}
+
 func kmpPreprocess(pattern string, ShiftArr []int) {
 	m := len(pattern)
 	i := 0
@@ -126,4 +154,37 @@ func kmpPreprocess(pattern string, ShiftArr []int) {
 		j++
 		ShiftArr[i] = j
 	}
+}
+
+func (t *StringTree) findUtil(curr *Node, value string) bool {
+	var compare int
+	if curr == nil {
+		return false
+	}
+	compare = strings.Compare(curr.value, value)
+	if compare == 0 {
+		return true
+	}
+
+	if compare == 1 {
+		return t.findUtil(curr.lChild, value)
+	}
+	return t.findUtil(curr.rChild, value)
+}
+func (t *StringTree) insertUtil(value string, curr *Node) *Node {
+	var compare int
+	if curr == nil {
+		curr = new(Node)
+		curr.value = value
+	} else {
+		compare = strings.Compare(curr.value, value)
+		if compare == 0 {
+			curr.count++
+		} else if compare == 1 {
+			curr.lChild = t.insertUtil(value, curr.lChild)
+		} else {
+			curr.rChild = t.insertUtil(value, curr.rChild)
+		}
+	}
+	return curr
 }

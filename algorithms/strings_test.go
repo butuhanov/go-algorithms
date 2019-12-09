@@ -132,3 +132,29 @@ func TestKMPFindCount(t *testing.T) {
 	}
 
 }
+
+func TestStringTree(t *testing.T) {
+	cases := []struct {
+		text    string
+		pattern string
+		result  bool
+	}{
+		{"Test 1", "ll", false},
+		{"Test 3", "3", false},
+		{"Test 4", "Test 4", true},
+	}
+	tt := new(StringTree)
+	for _, element := range cases {
+		tt.InsertBSTree(element.text)
+	}
+	for _, element := range cases {
+		v := tt.FindBSTree(element.pattern)
+		if v != element.result {
+			t.Error(
+				"For", element.text, "find", element.pattern,
+				"expected", element.result,
+				"got", v,
+			)
+		}
+	}
+}
