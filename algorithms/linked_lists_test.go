@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -36,28 +37,67 @@ func TestLinkedList(t *testing.T) {
 	lst3.LLAddHead(35)
 	lst3.LLAddHead(-12)
 
+	lst4 := &LList{}
+	lst4.LLAddTail(1)
+
+	lst5 := &LList{}
+	lst5.LLAddTail(-1)
+	lst5.LLAddTail(1)
+
+	lst6 := &LList{}
+	lst6.LLPrint()
+	lst6.LLAddHead(11)
+	lst6.LLPrint()
+	lst6.LLAddHead(-2)
+	lst6.LLPrint()
+	lst6.LLAddTail(32)
+	lst6.LLPrint()
+	lst6.LLAddHead(35)
+	lst6.LLPrint()
+	lst6.LLAddHead(-12)
+	lst6.LLPrint()
+	lst6.LLAddTail(2)
+	lst6.LLPrint()
+	lst6.LLAddHead(32)
+	lst6.LLPrint()
+	lst6.LLAddTail(62)
+	lst6.LLPrint()
+	lst6.LLAddHead(-122)
+	lst6.LLPrint()
+	lst6.LLAddHead(62)
+	lst6.LLPrint()
+	lst6.LLAddHead(12)
+	lst6.LLPrint()
+	lst6.LLAddTail(-125)
+	lst6.LLPrint()
+
 	var tests = []testElements{
 		{lst0, 0, true},
 		{lst, 3, false},
 		{lst1, 3, false},
 		{lst2, 1, false},
 		{lst3, 5, false},
+		{lst4, 1, false},
+		{lst5, 2, false},
+		{lst6, 12, false},
 	}
 
 	t.Run("Size of List", func(t *testing.T) {
 
 		for _, element := range tests {
-
+			fmt.Printf("%#v\n", element.lst)
+			
 			got := element.lst.LLSize() //lst.LLSize()
 			want := element.sizeResult
 
 			if got != want {
 				t.Error(
-					"For", lst,
+					"For", element.lst,
 					"expected", want,
 					"got", got,
 				)
 			}
+
 		}
 	})
 
