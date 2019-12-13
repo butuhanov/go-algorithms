@@ -57,3 +57,20 @@ func (list *LList) LLPrint() {
 	}
 	fmt.Println("")
 }
+
+// LLSortedInsert - inserts an element in sorted order in linked list given Head reference
+func (list *LList) LLSortedInsert(value int) {
+	newNode := &NodeLL{value, nil}
+	curr := list.head
+
+	if curr == nil || curr.value > value {
+		newNode.next = list.head
+		list.head = newNode
+		return
+	}
+	for curr.next != nil && curr.next.value < value {
+		curr = curr.next
+	}
+	newNode.next = curr.next
+	curr.next = newNode
+}

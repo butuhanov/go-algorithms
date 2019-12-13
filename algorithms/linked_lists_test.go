@@ -50,9 +50,13 @@ func TestLinkedList(t *testing.T) {
 	lst6.LLPrint()
 	lst6.LLAddHead(-2)
 	lst6.LLPrint()
+	lst6.LLSortedInsert(5)
+	lst6.LLPrint()
 	lst6.LLAddTail(32)
 	lst6.LLPrint()
 	lst6.LLAddHead(35)
+	lst6.LLPrint()
+	lst6.LLSortedInsert(6)
 	lst6.LLPrint()
 	lst6.LLAddHead(-12)
 	lst6.LLPrint()
@@ -86,7 +90,7 @@ func TestLinkedList(t *testing.T) {
 
 		for _, element := range tests {
 			fmt.Printf("%#v\n", element.lst)
-			
+
 			got := element.lst.LLSize() //lst.LLSize()
 			want := element.sizeResult
 
