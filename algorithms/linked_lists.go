@@ -77,12 +77,24 @@ func (list *LList) LLSortedInsert(value int) {
 
 // LLElementIsPresent - search element in a linked list
 func (list *LList) LLElementIsPresent(data int) bool {
-	temp := list.head
-	for temp != nil {
+	temp := list.head // a temp variable, which will point to head of the list
+	for temp != nil { //  iterate through the list.
 		if temp.value == data {
 			return true
 		}
 		temp = temp.next
 	}
 	return false
+}
+
+// LLRemoveHead - Delete First element in a linked list.
+func (list *LList) LLRemoveHead() (int, bool) {
+	if list.LLIsEmpty() {
+		fmt.Println("EmptyListError")
+		return 0, false
+	}
+	value := list.head.value
+	list.head = list.head.next
+	list.count--
+	return value, true
 }
