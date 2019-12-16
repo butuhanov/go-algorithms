@@ -8,9 +8,11 @@ import (
 func TestLinkedList(t *testing.T) {
 
 	type testElements struct {
-		lst         *LList
-		sizeResult  int
-		emptyResult bool
+		lst          *LList
+		sizeResult   int
+		emptyResult  bool
+		searchData   int
+		searchResult bool
 	}
 
 	//lst := new(List)
@@ -76,14 +78,18 @@ func TestLinkedList(t *testing.T) {
 	lst6.LLPrint()
 
 	var tests = []testElements{
-		{lst0, 0, true},
-		{lst, 3, false},
-		{lst1, 3, false},
-		{lst2, 1, false},
-		{lst3, 5, false},
-		{lst4, 1, false},
-		{lst5, 2, false},
-		{lst6, 12, false},
+		{lst0, 0, true, 1, false},
+		{lst, 3, false, 1, true},
+		{lst1, 3, false, 32, true},
+		{lst1, 3, false, 1, false},
+		{lst2, 1, false, 1, false},
+		{lst3, 5, false, -2, true},
+		{lst4, 1, false, 1, true},
+		{lst5, 2, false, 1, true},
+		{lst6, 12, false, -12, true},
+		{lst6, 12, false, -122, true},
+		{lst6, 12, false, 6, true},
+		{lst6, 12, false, 1, false},
 	}
 
 	t.Run("Size of List", func(t *testing.T) {
@@ -111,6 +117,24 @@ func TestLinkedList(t *testing.T) {
 
 			got := element.lst.LLIsEmpty() //lst.LLSize()
 			want := element.emptyResult
+
+			if got != want {
+				t.Error(
+					"For", lst,
+					"expected", want,
+					"got", got,
+				)
+			}
+		}
+
+	})
+
+	t.Run("Search element", func(t *testing.T) {
+
+		for _, element := range tests {
+
+			got := element.lst.LLElementIsPresent(element.searchData) //lst.LLSize()
+			want := element.searchResult
 
 			if got != want {
 				t.Error(

@@ -74,3 +74,15 @@ func (list *LList) LLSortedInsert(value int) {
 	newNode.next = curr.next
 	curr.next = newNode
 }
+
+// LLElementIsPresent - search element in a linked list
+func (list *LList) LLElementIsPresent(data int) bool {
+	temp := list.head
+	for temp != nil {
+		if temp.value == data {
+			return true
+		}
+		temp = temp.next
+	}
+	return false
+}
