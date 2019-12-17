@@ -98,3 +98,26 @@ func (list *LList) LLRemoveHead() (int, bool) {
 	list.count--
 	return value, true
 }
+
+// LLDeleteNode - Delete node from the linked list given its value.
+func (list *LList) LLDeleteNode(delValue int) bool {
+	temp := list.head
+	if list.LLIsEmpty() {
+		fmt.Println("EmptyListError")
+		return false
+	}
+	if delValue == list.head.value {
+		list.head = list.head.next
+		list.count--
+		return true
+	}
+	for temp.next != nil {
+		if temp.next.value == delValue {
+			temp.next = temp.next.next
+			list.count--
+			return true
+		}
+		temp = temp.next
+	}
+	return false
+}
