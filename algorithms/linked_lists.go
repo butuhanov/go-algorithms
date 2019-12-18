@@ -121,3 +121,20 @@ func (list *LList) LLDeleteNode(delValue int) bool {
 	}
 	return false
 }
+
+// LLDeleteNodes - deletes all occurences of particular value from linked list
+func (list *LList) LLDeleteNodes(delValue int) {
+	currNode := list.head
+	for currNode != nil && currNode.value == delValue {
+		list.head = currNode.next
+		currNode = list.head
+	}
+	for currNode != nil {
+		nextNode := currNode.next
+		if nextNode != nil && nextNode.value == delValue {
+			currNode.next = nextNode.next
+		} else {
+			currNode = nextNode
+		}
+	}
+}

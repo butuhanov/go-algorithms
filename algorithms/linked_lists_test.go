@@ -85,7 +85,7 @@ func TestLinkedList(t *testing.T) {
 	lst6.LLPrint()
 	lst6.LLAddTail(62)
 	lst6.LLPrint()
-	lst6.LLDeleteNode(32)
+	lst6.LLDeleteNodes(32)
 	lst6.LLPrint()
 	lst6.LLDeleteNode(62)
 	lst6.LLPrint()
@@ -98,9 +98,9 @@ func TestLinkedList(t *testing.T) {
 	lst6.LLAddTail(-125)
 	lst6.LLPrint()
 	lst6.LLAddTail(162)
-	lst6.LLAddTail(362)
-	lst6.LLAddHead(32)
-	lst6.LLAddTail(62)
+	lst6.LLAddTail(42)
+	lst6.LLAddHead(42)
+	lst6.LLPrint()
 
 	var tests = []testElements{
 		{lst0, 0, true, 1, false},
