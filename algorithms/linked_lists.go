@@ -48,14 +48,16 @@ func (list *LList) LLAddTail(value int) {
 }
 
 // LLPrint prints elements of a linked list
-func (list *LList) LLPrint() {
+func (list *LList) LLPrint() []int {
 	temp := list.head
+	result := []int{}
 	for temp != nil {
-
+		result = append(result, temp.value)
 		fmt.Print(temp.value, " ")
 		temp = temp.next
 	}
 	fmt.Println("")
+	return result
 }
 
 // LLSortedInsert - inserts an element in sorted order in linked list given Head reference
@@ -141,6 +143,19 @@ func (list *LList) LLDeleteNodes(delValue int) {
 
 // FreeLList - deletes all the elements of a linked list
 func (list *LList) FreeLList() {
-list.head = nil
-list.count = 0
+	list.head = nil
+	list.count = 0
+}
+
+// LLReverse reversed linked list iteratively
+func (list *LList) LLReverse() {
+	curr := list.head
+	var prev, next *NodeLL
+	for curr != nil {
+		next = curr.next
+		curr.next = prev
+		prev = curr
+		curr = next
+	}
+	list.head = prev
 }

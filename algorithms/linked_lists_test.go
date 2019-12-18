@@ -2,6 +2,7 @@ package algorithms
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -169,6 +170,23 @@ func TestLinkedList(t *testing.T) {
 					"got", got,
 				)
 			}
+		}
+
+	})
+
+	t.Run("Reverse elements", func(t *testing.T) {
+		want := []int{42, 162, -125, 2, 11, 5, -2, -124, 35, 6, -122, 62, 12, 42}
+		lst6.LLPrint()
+		lst6.LLReverse() //lst.LLSize()
+		// want := [0, 1, 2, 3]
+		get := lst6.LLPrint()
+
+		if !reflect.DeepEqual(want, get) {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", get,
+			)
 		}
 
 	})
