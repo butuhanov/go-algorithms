@@ -138,3 +138,9 @@ func (list *LList) LLDeleteNodes(delValue int) {
 		}
 	}
 }
+
+// FreeLList - deletes all the elements of a linked list
+func (list *LList) FreeLList() {
+list.head = nil
+list.count = 0
+}

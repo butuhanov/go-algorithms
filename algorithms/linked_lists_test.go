@@ -47,6 +47,7 @@ func TestLinkedList(t *testing.T) {
 	lst3.LLAddHead(32)
 	lst3.LLAddHead(35)
 	lst3.LLAddHead(-12)
+	lst3.FreeLList()
 
 	lst4 := &LList{}
 	lst4.LLAddTail(1)
@@ -108,7 +109,7 @@ func TestLinkedList(t *testing.T) {
 		{lst1, 3, false, 32, true},
 		{lst1, 3, false, 1, false},
 		{lst2, 1, false, 1, false},
-		{lst3, 5, false, -2, true},
+		{lst3, 0, true, -2, false},
 		{lst4, 1, false, 1, true},
 		{lst5, 2, false, 1, true},
 		{lst6, 12, false, 12, true},
