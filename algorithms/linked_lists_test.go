@@ -191,4 +191,21 @@ func TestLinkedList(t *testing.T) {
 
 	})
 
+	t.Run("Recursive reverse elements", func(t *testing.T) {
+		want := []int{42, 12, 62, -122, 6, 35, -124, -2, 5, 11, 2, -125, 162, 42}
+		lst6.LLPrint()
+		lst6.LLReverseRecurse() //lst.LLSize()
+		// want := [0, 1, 2, 3]
+		get := lst6.LLPrint()
+
+		if !reflect.DeepEqual(want, get) {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", get,
+			)
+		}
+
+	})
+
 }

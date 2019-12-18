@@ -78,6 +78,26 @@ func BinarySearchRecursive(data []int, low int, high int, value int) int {
 	}
 }
 
+// LLReverseRecurse - recursively revers linked list
+func (list *LList) LLReverseRecurse() {
+	list.head = list.reverseLLRecurseUtil(list.head, nil)
+}
+
+func (list *LList) reverseLLRecurseUtil(currentNode *NodeLL, nextNode *NodeLL) *NodeLL {
+	var ret *NodeLL
+	if currentNode == nil {
+		return nil
+	}
+	if currentNode.next == nil {
+		currentNode.next = nextNode
+		return currentNode
+	}
+
+	ret = list.reverseLLRecurseUtil(currentNode.next, currentNode)
+	currentNode.next = nextNode
+	return ret
+}
+
 func tohUtil(num int, from string, to string, temp string) string {
 	var result string
 
