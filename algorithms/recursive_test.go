@@ -32,6 +32,33 @@ func TestFactorial(t *testing.T) {
 	}
 }
 
+func TestFactorialTail(t *testing.T) {
+
+	type testpair struct {
+		value  int
+		result int
+	}
+
+	var tests = []testpair{
+		{1, 1},
+		{2, 2},
+		{3, 6},
+		{10, 3628800},
+		{20, 2432902008176640000},
+	}
+
+	for _, pair := range tests {
+		v := FactorialTail(pair.value)
+		if v != pair.result {
+			t.Error(
+				"For", pair.value,
+				"expected", pair.result,
+				"got", v,
+			)
+		}
+	}
+}
+
 func TestTowersOfHanoi(t *testing.T) {
 
 	type testpair struct {
