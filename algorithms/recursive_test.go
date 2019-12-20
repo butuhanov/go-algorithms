@@ -59,6 +59,18 @@ func TestFactorialTail(t *testing.T) {
 	}
 }
 
+func BenchmarkFactorial(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Factorial(150)
+	}
+}
+
+func BenchmarkFactorialTail(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		FactorialTail(150)
+	}
+}
+
 func TestTowersOfHanoi(t *testing.T) {
 
 	type testpair struct {
