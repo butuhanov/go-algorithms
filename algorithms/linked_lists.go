@@ -1,7 +1,5 @@
 package algorithms
 
-import "fmt"
-
 // LList is linked list item
 type LList struct {
 	head  *NodeLL
@@ -53,10 +51,10 @@ func (list *LList) LLPrint() []int {
 	result := []int{}
 	for temp != nil {
 		result = append(result, temp.value)
-		fmt.Print(temp.value, " ")
+		// fmt.Print(temp.value, " ")
 		temp = temp.next
 	}
-	fmt.Println("")
+	// fmt.Println("")
 	return result
 }
 
@@ -92,7 +90,7 @@ func (list *LList) LLElementIsPresent(data int) bool {
 // LLRemoveHead - Delete First element in a linked list.
 func (list *LList) LLRemoveHead() (int, bool) {
 	if list.LLIsEmpty() {
-		fmt.Println("EmptyListError")
+		// fmt.Println("EmptyListError")
 		return 0, false
 	}
 	value := list.head.value
@@ -105,7 +103,7 @@ func (list *LList) LLRemoveHead() (int, bool) {
 func (list *LList) LLDeleteNode(delValue int) bool {
 	temp := list.head
 	if list.LLIsEmpty() {
-		fmt.Println("EmptyListError")
+		// fmt.Println("EmptyListError")
 		return false
 	}
 	if delValue == list.head.value {

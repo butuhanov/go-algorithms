@@ -16,15 +16,16 @@ func Factorial(i int) int {
 	return i * Factorial(i-1)
 }
 
+// FactorialTail an example of Tail-Recursive function
 func FactorialTail(n int) int {
-   return factT(n-1, n)
+	return factT(n-1, n)
 }
 
 func factT(n, current int) int {
-   if n == 1 {
-      return current
-   }
-   return factT(n-1, n * current)
+	if n <= 1 {
+		return current
+	}
+	return factT(n-1, n*current)
 }
 
 // TowersOfHanoi returns a sequence of actions to solve an Tower of Hanoi puzzle (https://en.wikipedia.org/wiki/Tower_of_Hanoi)

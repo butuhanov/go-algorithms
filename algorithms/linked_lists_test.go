@@ -1,7 +1,6 @@
 package algorithms
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -58,51 +57,51 @@ func TestLinkedList(t *testing.T) {
 	lst5.LLAddTail(1)
 
 	lst6 := &LList{}
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(11)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(-2)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLSortedInsert(5)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLRemoveHead()
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLRemoveHead()
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(-2)
 	lst6.LLAddTail(32)
 	lst6.LLSortedInsert(5)
 	lst6.LLSortedInsert(-124)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(35)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLSortedInsert(6)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(-12)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddTail(2)
 	lst6.LLRemoveHead()
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(32)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddTail(62)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLDeleteNodes(32)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLDeleteNode(62)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(-122)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(62)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddHead(12)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddTail(-125)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 	lst6.LLAddTail(162)
 	lst6.LLAddTail(42)
 	lst6.LLAddHead(42)
-	lst6.LLPrint()
+	// lst6.LLPrint()
 
 	var tests = []testElements{
 		{lst0, 0, true, 1, false},
@@ -122,7 +121,7 @@ func TestLinkedList(t *testing.T) {
 	t.Run("Size of List", func(t *testing.T) {
 
 		for _, element := range tests {
-			fmt.Printf("%#v\n", element.lst)
+			// fmt.Printf("%#v\n", element.lst)
 
 			got := element.lst.LLSize() //lst.LLSize()
 			want := element.sizeResult
@@ -176,7 +175,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("Reverse elements", func(t *testing.T) {
 		want := []int{42, 162, -125, 2, 11, 5, -2, -124, 35, 6, -122, 62, 12, 42}
-		lst6.LLPrint()
+		// lst6.LLPrint()
 		lst6.LLReverse() //lst.LLSize()
 		// want := [0, 1, 2, 3]
 		get := lst6.LLPrint()
@@ -193,7 +192,7 @@ func TestLinkedList(t *testing.T) {
 
 	t.Run("Recursive reverse elements", func(t *testing.T) {
 		want := []int{42, 12, 62, -122, 6, 35, -124, -2, 5, 11, 2, -125, 162, 42}
-		lst6.LLPrint()
+		// lst6.LLPrint()
 		lst6.LLReverseRecurse() //lst.LLSize()
 		// want := [0, 1, 2, 3]
 		get := lst6.LLPrint()
