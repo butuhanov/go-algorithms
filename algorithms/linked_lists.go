@@ -185,3 +185,29 @@ func (list *LList) CopyLListReversed() *LList {
 	ll2.head = tempNode
 	return ll2
 }
+
+// CopyLList copying one linked list to another
+func (list *LList) CopyLList() *LList {
+	var headNode, tailNode, tempNode *NodeLL
+	curr := list.head
+
+	if curr == nil {
+		ll2 := new(LList)
+		ll2.head = nil
+		return ll2
+	}
+
+	headNode = &NodeLL{curr.value, nil}
+	tailNode = headNode
+	curr = curr.next
+
+	for curr != nil {
+		tempNode = &NodeLL{curr.value, nil}
+		tailNode.next = tempNode
+		tailNode = tempNode
+		curr = curr.next
+	}
+	ll2 := new(LList)
+	ll2.head = headNode
+	return ll2
+}

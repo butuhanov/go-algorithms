@@ -252,4 +252,20 @@ func TestLinkedList(t *testing.T) {
 		}
 
 	})
+
+	t.Run("Copying", func(t *testing.T) {
+
+		want := []int{42, 12, 62, -122, 6, 35, -124, -2, 5, 11, 2, -125, 162, 42}
+
+		get := lst6.CopyLList().LLPrint()
+
+		if !reflect.DeepEqual(want, get) {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", get,
+			)
+		}
+
+	})
 }
