@@ -103,6 +103,17 @@ func TestLinkedList(t *testing.T) {
 	lst6.LLAddHead(42)
 	// lst6.LLPrint()
 
+	lst10 := &LList{}
+	lst10.LLAddHead(11)
+	lst10.LLAddHead(11)
+	lst10.LLAddHead(-2)
+	lst10.LLAddHead(32)
+	lst10.LLAddHead(32)
+	lst10.LLAddHead(35)
+	lst10.LLAddHead(-12)
+	lst10.LLAddHead(-12)
+	lst10.LLAddHead(32)
+
 	var tests = []testElements{
 		{lst0, 0, true, 1, false},
 		{lst, 3, false, 1, true},
@@ -196,6 +207,24 @@ func TestLinkedList(t *testing.T) {
 		lst6.LLReverseRecurse() //lst.LLSize()
 		// want := [0, 1, 2, 3]
 		get := lst6.LLPrint()
+
+		if !reflect.DeepEqual(want, get) {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", get,
+			)
+		}
+
+	})
+
+	t.Run("Remove duplicates", func(t *testing.T) {
+
+		want := []int{32, -12, 35, 32, -2, 11}
+
+		lst10.RemoveLLDuplicate() //lst.LLSize()
+		// want := [0, 1, 2, 3]
+		get := lst10.LLPrint()
 
 		if !reflect.DeepEqual(want, get) {
 			t.Error(

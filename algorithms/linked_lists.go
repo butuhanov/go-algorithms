@@ -1,5 +1,7 @@
 package algorithms
 
+import "fmt"
+
 // LList is linked list item
 type LList struct {
 	head  *NodeLL
@@ -51,10 +53,10 @@ func (list *LList) LLPrint() []int {
 	result := []int{}
 	for temp != nil {
 		result = append(result, temp.value)
-		// fmt.Print(temp.value, " ")
+		fmt.Print(temp.value, " ")
 		temp = temp.next
 	}
-	// fmt.Println("")
+	fmt.Println("")
 	return result
 }
 
@@ -156,4 +158,16 @@ func (list *LList) LLReverse() {
 		curr = next
 	}
 	list.head = prev
+}
+
+// RemoveLLDuplicate removes duplicates (which follow each other) from linked list
+func (list *LList) RemoveLLDuplicate() {
+	curr := list.head
+	for curr != nil {
+		if curr.next != nil && curr.value == curr.next.value {
+			curr.next = curr.next.next
+		} else {
+			curr = curr.next
+		}
+	}
 }
