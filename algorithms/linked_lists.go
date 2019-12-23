@@ -171,3 +171,17 @@ func (list *LList) RemoveLLDuplicate() {
 		}
 	}
 }
+
+// CopyLListReversed - Copy the content of linked list in another linked list in reverse order.
+func (list *LList) CopyLListReversed() *LList {
+	var tempNode, tempNode2 *NodeLL
+	curr := list.head
+	for curr != nil {
+		tempNode2 = &NodeLL{curr.value, tempNode}
+		curr = curr.next
+		tempNode = tempNode2
+	}
+	ll2 := new(LList)
+	ll2.head = tempNode
+	return ll2
+}

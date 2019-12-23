@@ -236,4 +236,20 @@ func TestLinkedList(t *testing.T) {
 
 	})
 
+	t.Run("Copy reversively", func(t *testing.T) {
+
+		// {42, 12, 62, -122, 6, 35, -124, -2, 5, 11, 2, -125, 162, 42}
+		want := []int{42, 162, -125, 2, 11, 5, -2, -124, 35, 6, -122, 62, 12, 42}
+
+		get := lst6.CopyLListReversed().LLPrint()
+
+		if !reflect.DeepEqual(want, get) {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", get,
+			)
+		}
+
+	})
 }
