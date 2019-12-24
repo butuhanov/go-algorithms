@@ -1,3 +1,3 @@
-module github.com/butuhanov/go-algorithms/algorithms
+module github.com/butuhanov/go-algorithms
 
 go 1.13
