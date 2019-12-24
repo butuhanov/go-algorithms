@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	algorithm "github.com/butuhanov/go-algorithms"
+	algorithm "github.com/butuhanov/go-algorithms/algorithms"
 	// algorithm "github.com/butuhanov/go-algorithms/algorithms"
 )
 
