@@ -298,4 +298,54 @@ func TestLinkedList(t *testing.T) {
 		}
 
 	})
+
+	t.Run("Find length", func(t *testing.T) {
+
+		want := 14
+
+		got := lst6.LengthLL()
+
+		if got != want {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", got,
+			)
+		}
+
+		want = 14
+
+		got = lst11.LengthLL()
+
+		if got != want {
+			t.Error(
+				"For", lst5,
+				"expected", want,
+				"got", got,
+			)
+		}
+
+		want = 3
+		got = lst.LengthLL()
+
+		if got != want {
+			t.Error(
+				"For", lst5,
+				"expected", want,
+				"got", got,
+			)
+		}
+		want = 0
+		got = lst0.LengthLL()
+
+		if got != want {
+			t.Error(
+				"For", lst5,
+				"expected", want,
+				"got", got,
+			)
+		}
+
+	})
+
 }

@@ -160,7 +160,6 @@ func (list *LList) LLReverse() {
 	list.head = prev
 }
 
-
 // RemoveLLDuplicate removes duplicates (which follow each other) from linked list
 func (list *LList) RemoveLLDuplicate() {
 	curr := list.head
@@ -215,15 +214,26 @@ func (list *LList) CopyLList() *LList {
 
 // CompareLList compare two lists recursively
 func (list *LList) CompareLList(ll *LList) bool {
-return list.compareListUtil(list.head, ll.head)
+	return list.compareListUtil(list.head, ll.head)
+}
+
+// LengthLL finds length of linked list
+func (list *LList) LengthLL() int {
+	curr := list.head
+	count := 0
+	for curr != nil {
+		count++
+		curr = curr.next
+	}
+	return count
 }
 
 func (list *LList) compareListUtil(head1 *NodeLL, head2 *NodeLL) bool {
-if head1 == nil && head2 == nil {
-return true
-} else if (head1 == nil) || (head2 == nil) || (head1.value != head2.value) {
-return false
-} else {
-return list.compareListUtil(head1.next, head2.next)
-}
+	if head1 == nil && head2 == nil {
+		return true
+	} else if (head1 == nil) || (head2 == nil) || (head1.value != head2.value) {
+		return false
+	} else {
+		return list.compareListUtil(head1.next, head2.next)
+	}
 }
