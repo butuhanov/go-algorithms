@@ -114,6 +114,8 @@ func TestLinkedList(t *testing.T) {
 	lst10.LLAddHead(-12)
 	lst10.LLAddHead(32)
 
+	lst11 := lst6.CopyLList()
+
 	var tests = []testElements{
 		{lst0, 0, true, 1, false},
 		{lst, 3, false, 1, true},
@@ -264,6 +266,34 @@ func TestLinkedList(t *testing.T) {
 				"For", lst6,
 				"expected", want,
 				"got", get,
+			)
+		}
+
+	})
+
+	t.Run("Comparing", func(t *testing.T) {
+
+		want := true
+
+		got := lst6.CompareLList(lst11)
+
+		if got != want {
+			t.Error(
+				"For", lst6,
+				"expected", want,
+				"got", got,
+			)
+		}
+
+		want = false
+
+		got = lst6.CompareLList(lst5)
+
+		if got != want {
+			t.Error(
+				"For", lst5,
+				"expected", want,
+				"got", got,
 			)
 		}
 
