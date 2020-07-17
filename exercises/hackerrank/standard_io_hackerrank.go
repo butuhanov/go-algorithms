@@ -24,6 +24,7 @@ func main() {
 	n, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
 
+	var result int32
 	// result := someFunction(s, n)
 
 	fmt.Fprintf(writer, "%d\n", result)
