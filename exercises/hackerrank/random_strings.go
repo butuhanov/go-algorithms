@@ -1,12 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
 	"math/rand"
 	"strconv"
-	"strings"
 	"time"
 	"unsafe"
 )
@@ -15,7 +12,7 @@ func randomStrings() {
 
 	// Debug
 	input := generateInput(20000)
-	//fmt.Println(input)
+	fmt.Println(input)
 
 }
 

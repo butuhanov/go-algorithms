@@ -24,6 +24,8 @@ func StandardIO() {
 	n, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
 
+	fmt.Println(n, s)
+
 	var result int32
 	// result := someFunction(s, n)
 
