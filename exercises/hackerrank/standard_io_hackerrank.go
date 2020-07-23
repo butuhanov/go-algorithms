@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func StandardIO() {
+func main() {
 	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
