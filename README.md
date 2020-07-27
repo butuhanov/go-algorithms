@@ -7,3 +7,5 @@ https://github.com/butuhanov/go-algorithms
 Here is just a set of different algorithms written in Go sorted by topic.
 
 It can be used for educational purposes.
+
+I use some of these samples in my work.
