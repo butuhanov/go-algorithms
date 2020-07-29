@@ -29,6 +29,19 @@ func main() {
 	var result int32
 	// result := someFunction(s, n)
 
+
+	// Getting array from string
+	arrTemp := strings.Split(readLine(reader), " ")
+	var arr []int32
+
+	for i := 0; i < int(n); i++ {
+			arrItemTemp, err := strconv.ParseInt(arrTemp[i], 10, 64)
+			checkError(err)
+			arrItem := int32(arrItemTemp)
+			arr = append(arr, arrItem)
+	}
+
+
 	fmt.Fprintf(writer, "%d\n", result)
 
 	writer.Flush()
